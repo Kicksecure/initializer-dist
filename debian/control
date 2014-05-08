@@ -1,0 +1,82 @@
+## This file is part of Whonix.
+## Copyright (C) 2012 - 2014 Patrick Schleizer <adrelanos@riseup.net>
+## See the file COPYING for copying conditions.
+
+Source: whonix_initializer
+Section: misc
+Priority: optional
+Maintainer: Patrick Schleizer <adrelanos@riseup.net>
+Build-Depends: debhelper (>= 8), faketime, git, ruby-ronn (>= 0.7.3)
+Homepage: https://www.whonix.org/wiki/AppArmor
+Vcs-Browser: https://github.com/Whonix/whonix_initializer
+Vcs-Git: https://github.com/Whonix/whonix_initializer.git
+Standards-Version: 3.9.4
+
+Package: whonix_initializer
+Architecture: all
+Depends: curl, uuid-runtime, sudo, logrotate, bc, ${misc:Depends}
+Description: Secure Distributed Network Time Synchronization
+ Time keeping is crucial for security, privacy, and anonymity. Sdwdate
+ distributes trust among three types of servers (Friendly, Neutral, and
+ Hostile), using the median time of those servers.
+ .
+ Sdwdate sets the local clock by securely connecting with TLS to remote
+ servers and extracting the remote time out of http headers. Unlike
+ ntpdate, whonix_initializer uses TCP, for connecting to a remote HTTPS
+ enabled service, and provides some protection against adversaries that try to
+ feed you malicious time information. Since it does not require UDP, it
+ can work over the Tor network.
+ .
+ If too many of the servers are offline, the clock is untouched. It runs at
+ randomized intervals to avoid fingerprinting (which would reveal that one is
+ not only a whonix_initializer user but also a Tor user).
+ .
+ Plugins are supported via hooks. These hooks include pre-connect, pre-fetch,
+ post-fetch, post-success, post-failure, and progress. Sdwdate comes without a
+ GUI, but one could be added as a plugin.
+
+tlsdate
+Description: secure parasitic rdate replacement
+ tlsdate sets the local clock by securely connecting with TLS to remote
+ servers and extracting the remote time out of the secure handshake. Unlike
+ ntpdate, tlsdate uses TCP, for instance connecting to a remote HTTPS or TLS
+ enabled service, and provides some protection against adversaries that try to
+ feed you malicious time information.
+
+rdate
+Description-en: sets the system's date from a remote host
+ rdate displays and sets the local date and time from the host name
+ or address given as the argument. The time source may be an RFC 868
+ TCP protocol server, which is usually implemented as a built-in
+ service of inetd(8), or an RFC 2030 protocol SNTP/NTP server. By
+ default, rdate uses the RFC 868 TCP protocol.
+
+ntp
+Description-en: Network Time Protocol daemon and utility programs
+ NTP, the Network Time Protocol, is used to keep computer clocks
+ accurate by synchronizing them over the Internet or a local network,
+ or by following an accurate hardware receiver that interprets GPS,
+ DCF-77, NIST or similar time signals.
+ .
+ This package contains the NTP daemon and utility programs.  An NTP
+ daemon needs to be running on each host that is to have its clock
+ accuracy controlled by NTP.  The same NTP daemon is also used to
+ provide NTP service to other hosts.
+ .
+ For more information about the NTP protocol and NTP server
+ configuration and operation, install the package "ntp-doc".
+
+ NTP, the Network Time Protocol, is used to keep computer clocks
+ accurate by synchronizing them over the Internet or a local network,
+ or by following an accurate hardware receiver that interprets GPS,
+ DCF-77, NIST or similar time signals.
+ .
+ ntpdate is a simple NTP client that sets a system's clock to match
+ the time obtained by communicating with one or more NTP servers.  It
+ is not sufficient, however, for maintaining an accurate clock in the
+ long run.  ntpdate by itself is useful for occasionally setting the
+ time on machines that do not have full-time network access, such as
+ laptops.
+ .
+ If the full NTP daemon from the package "ntp" is installed, then
+ ntpdate is not necessary.
