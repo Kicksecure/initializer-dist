@@ -4,4 +4,4 @@
 
 version=3
 opts=filenamemangle=s/.+\/v?(.*)\.tar\.gz/<project>-$1.tar.gz/ \
-  https://github.com/Whonix/sdwdate/tags .*/v?(\d[\d\.]+)\.tar\.gz
+  https://github.com/Whonix/whonix-initializer/tags .*/v?(\d[\d\.]+)\.tar\.gz
