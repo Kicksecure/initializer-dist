@@ -14,5 +14,5 @@ Standards-Version: 3.9.4
 
 Package: whonix-initializer
 Architecture: all
-Depends: whonixsetup, ${misc:Depends}
+Depends: ${misc:Depends}
 Description: whonix-initializer
