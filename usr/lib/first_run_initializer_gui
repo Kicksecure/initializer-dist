@@ -49,8 +49,7 @@ echo "\
 sleep 10 &
 sleeppid_one="$!"
 
-## There is an /etc/sudoers.d exception.
-sudo /usr/lib/whonix_initializer/first_run_initializer >>"$log_file" 2>&1 &
+/usr/lib/whonix_initializer/first_run_initializer >>"$log_file" 2>&1 &
 first_run_initializer_pid="$!"
 fake_progress_bar
 sync
@@ -83,8 +82,7 @@ if [ "$CI" = "true" ]; then
    ## Your job will be requeued shortly."
    echo "[INFO] [Whonix First Run Initializer]: CI detected. Skipping reboot."
 else
-   ## There is an /etc/sudoers.d exception.
-   sudo /sbin/reboot
+   reboot
 fi
 
 ## The sleep is just in for the look an feel.
