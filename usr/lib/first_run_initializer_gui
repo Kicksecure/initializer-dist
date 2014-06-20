@@ -25,10 +25,10 @@ fake_progress_bar() {
    done
 }
 
-mkdir --parents ~/.whonix/
-log_file=~/.whonix/first_run_initializer.log
-start_file=~/.whonix/first_run_initializer.start
-done_file=~/.whonix/first_run_initializer.done
+mkdir --parents ~/".whonix/"
+log_file=~/".whonix/first_run_initializer.log"
+start_file=~/".whonix/first_run_initializer.start"
+done_file=~/".whonix/first_run_initializer.done"
 
 ## Check if Whonix First Run Initializer already finished, exit if so.
 if [ -f "$done_file" ]; then
@@ -49,7 +49,7 @@ echo "\
 sleep 10 &
 sleeppid_one="$!"
 
-/usr/lib/whonix_initializer/first_run_initializer >>"$log_file" 2>&1 &
+/usr/lib/first_run_initializer >> "$log_file" 2>&1 &
 first_run_initializer_pid="$!"
 fake_progress_bar
 sync
