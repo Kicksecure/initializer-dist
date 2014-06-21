@@ -129,7 +129,7 @@ if [ "$CI" = "true" ]; then
    ## Your job will be requeued shortly."
    echo "[${cyan}${bold}INFO${reset}] [${cyan}Whonix First Run Initializer${reset}]: CI detected. Skipping reboot."
 else
-   reboot
+   reboot & disown
 fi
 
 ## The sleep is just in for the look an feel.
