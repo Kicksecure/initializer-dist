@@ -71,10 +71,12 @@ fake_progress_bar() {
    done
 }
 
-mkdir --parents ~/".whonix/"
-log_file=~/".whonix/first_run_initializer.log"
-start_file=~/".whonix/first_run_initializer.start"
-done_file=~/".whonix/first_run_initializer.done"
+## need to use hardcoded "/root/" instead of "~/", because "~/" does not exist
+## when run through an init script.
+mkdir --parents "/root/.whonix/"
+log_file="/root/.whonix/first_run_initializer.log"
+start_file="/root/.whonix/first_run_initializer.start"
+done_file="/root/.whonix/first_run_initializer.done"
 
 ## Check if Whonix First Run Initializer already finished, exit if so.
 if [ -f "$done_file" ]; then
