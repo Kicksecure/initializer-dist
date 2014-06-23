@@ -277,8 +277,15 @@ maybe_run "/var/lib/dpkg/info/gconf2-common"
 ## Only required for Debian Wheezy, not required on Debian Jessie?
 ## debconf's prerm script does not delete /var/cache/debconf/* and there is no
 ## postrm script. Therefore we manually delete files in that folder.
-maybe_run "/var/lib/dpkg/info/debconf"
-maybe_rm /var/cache/debconf/*
+## No longer doing this, since it causes many issues. Such as.
+## When you run:
+##     sudo dpkg-reconfigure console-data
+## and select
+##    select select keymap from archlist
+## then it says
+##    Looking for keymap to install: NONE
+#maybe_run "/var/lib/dpkg/info/debconf"
+#maybe_rm /var/cache/debconf/*
 
 ## Kill dhclient3 to prevent rewrite of /var/lib/dhcp/*.
 killall dhclient3 || true
