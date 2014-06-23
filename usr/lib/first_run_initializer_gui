@@ -89,9 +89,9 @@ touch "$start_file"
 sync
 
 echo "\
-[${cyan}${bold}INFO${reset}] [${cyan}Whonix First Run Initializer${reset}]: Preparing Whonix... Will reboot
-       when finished... ${under}Do not interrupt this process or your system might be${reset}
-       ${under}unstable!${reset} This may take a while..."
+[${cyan}${bold}INFO${reset}] [${cyan}Whonix First Run Initializer${reset}]: Preparing Whonix... Will reboot when finished...
+       ${cyan}${under}Do not interrupt this process or your system might be unstable!${reset}
+       ${under}This may take a while...${reset}"
 
 ## The sleep is just in for the look an feel.
 sleep 10 &
@@ -109,13 +109,13 @@ touch "$done_file"
 sync
 
 if [ "$first_run_initializer_exit_code" = "0" ]; then
-   echo "[${cyan}${bold}INFO${reset}] [${cyan}Whonix First Run Initializer${reset}]: Done. Rebooting... This may take a while..."
+   echo "[${cyan}${bold}INFO${reset}] [${cyan}Whonix First Run Initializer${reset}]: Done. Rebooting... ${under}This may take a while...${eunder}"
 else
    echo "\
 [${red}${bold}ERROR${reset}] [${cyan}Whonix First Run Initializer${reset}]: Error!
         ${under}Please report this Whonix bug! Submit Whonix First Run Initializer's${reset}
         ${under}log file $log_file to Whonix developers!${reset}
-        Rebooting... This may take a while..."
+        Rebooting... ${under}This may take a while...${reset}"
 fi
 
 ## The sleep is just in for the look an feel.
