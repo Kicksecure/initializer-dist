@@ -87,6 +87,15 @@ fi
 ## This is no longer required for Debian Jessie?
 apt-key update
 
+## non-deterministic [20]
+## /var/cache/debconf/config.dat
+## Reconfigure all packages.
+#for pkg in $(dpkg-query --show --showformat='${Package} '); do
+   #echo "reconfiguring $pkg..."
+   #dpkg-reconfigure --frontend=noninteractive "$pkg"
+   #echo "reconfigured $pkg."
+#done
+
 dpkg --configure -a
 
 true "INFO: End of First Run Initializer."
