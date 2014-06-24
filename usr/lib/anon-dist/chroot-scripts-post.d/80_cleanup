@@ -373,6 +373,13 @@ maybe_rm /etc/apt/trustdb.gpg
 ## comments. Maybe not necessary on Debian Jessie for some reason.
 maybe_rm /etc/debootstrap/config
 
+## non-deterministic [21]
+## Only required when using the anon-shared-build-inst-tb chroot-post.d script.
+## No need to manually re-create it.
+## Gets automatically re-created on next run of tb-updater.
+## This is no longer required for Debian Jessie?
+rm -r /home/user/.tb/gpgtmpdir || true
+
 ## Truncate all log files, keeping user groups and permissions.
 find /var/log -type f -exec cp /dev/null {} \;
 
