@@ -155,7 +155,7 @@ fi
          true "INFO: $script not executable."
       else
          download_package "$package"
-         true "INFO: Running... "$script" remove"
+         true "INFO: Running... $script remove"
          export DPKG_MAINTSCRIPT_PACKAGE="$package"
          ## TODO: export DPKG_MAINTSCRIPT_ARCH="?"
          export DPKG_MAINTSCRIPT_NAME="prerm"
@@ -180,7 +180,7 @@ fi
          export DPKG_MAINTSCRIPT_PACKAGE="$package"
          ## TODO: export DPKG_MAINTSCRIPT_ARCH="?"
          export DPKG_MAINTSCRIPT_NAME="postrm"
-         true "INFO: Running... "$script" purge"
+         true "INFO: Running... $script purge"
          ## Example:
          ## /var/lib/dpkg/info/fontconfig.postrm purge
          "$script" purge
