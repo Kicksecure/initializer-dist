@@ -17,7 +17,7 @@ Architecture: all
 Depends: psmisc, ${misc:Depends}
 Description: Implements Whonix's Verifiable Builds feature and initializes Whonix
  Contains a chroot-scripts-post.d script, that cleans up temporary files, logs,
- and removed non-deterministic files using existing debian prerm and postrm
+ and removed non-deterministic files using existing Debian prerm and postrm
  maintainer scripts. This helps auditors verifying binary builds of Whonix to
  check for backdoors and integrity.
  .
