@@ -71,7 +71,6 @@ fake_progress_bar() {
 
 ## need to use hardcoded "/root/" instead of "~/", because "~/" does not exist
 ## when run through an init script.
-mkdir --parents "/root/.whonix/"
 log_file="/root/.whonix/first_run_initializer.log"
 start_file="/root/.whonix/first_run_initializer.start"
 done_file="/root/.whonix/first_run_initializer.done"
@@ -88,6 +87,8 @@ if [ ! "$DPKG_MAINTSCRIPT_PACKAGE" = "" ]; then
    echo "INFO $0: Run by package manager. Exiting. Ok."
    exit 0
 fi
+
+mkdir --parents "/root/.whonix/"
 
 ## Log, that Whonix First Run Initializer attempted to start. This is useful in
 ## eventual case of bug reports.
