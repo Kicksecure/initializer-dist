@@ -9,7 +9,6 @@
 
 #set -x
 
-## Testing this.
 ## Extra precaution against this script getting automatically by dpkg after
 ## running apt-get. If the environment variable DPKG_MAINTSCRIPT_PACKAGE is
 ## set, then this script was started by apt-get -> dpkg -> invoke-rc.d.
