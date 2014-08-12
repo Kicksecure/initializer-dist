@@ -9,14 +9,6 @@
 
 #set -x
 
-## Extra precaution against this script getting automatically by dpkg after
-## running apt-get. If the environment variable DPKG_MAINTSCRIPT_PACKAGE is
-## set, then this script was started by apt-get -> dpkg -> invoke-rc.d.
-if [ ! "$DPKG_MAINTSCRIPT_PACKAGE" = "" ]; then
-   echo "INFO $0: Run by package manager. Exiting. Ok."
-   exit 0
-fi
-
 colors() {
    ## Thanks to:
    ## http://mywiki.wooledge.org/BashFAQ/037
@@ -61,8 +53,6 @@ colors() {
    } 2>/dev/null ||:
 }
 
-colors
-
 fake_progress_bar() {
    while true; do
       ps -p $sleeppid_one $sleeppid_two $sleeppid_three $sleeppid_four $first_run_initializer_pid >/dev/null 2>&1
@@ -91,10 +81,20 @@ if [ -f "$done_file" ]; then
    exit 0
 fi
 
+## Extra precaution against this script getting automatically by dpkg after
+## running apt-get. If the environment variable DPKG_MAINTSCRIPT_PACKAGE is
+## set, then this script was started by apt-get -> dpkg -> invoke-rc.d.
+if [ ! "$DPKG_MAINTSCRIPT_PACKAGE" = "" ]; then
+   echo "INFO $0: Run by package manager. Exiting. Ok."
+   exit 0
+fi
+
 ## Log, that Whonix First Run Initializer attempted to start. This is useful in
 ## eventual case of bug reports.
 touch "$start_file"
 sync
+
+colors
 
 echo "\
 [${cyan}${bold}INFO${reset}] [${cyan}Whonix First Run Initializer${reset}]: Preparing Whonix... Will reboot when finished...
