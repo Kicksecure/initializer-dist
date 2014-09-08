@@ -86,10 +86,20 @@ fi
    local package="$1"
    if [ "${downloaded[$package]}" = "1" ]; then
       true "INFO: Already downloaded $package."
+   elif [ "${downloaded[$package]}" = "0" ]; then
+      true "INFO: Download of $package already failed earlier."
    else
       true "INFO: Downloading $package..."
-      apt-get $apt_sourcelist_empty $apt_sourceparts $apt_timeout_opts $apt_verify_opts download "$package"
-      downloaded[$package]="1"
+      local apt_get_download_exit_code="0"
+      apt-get $apt_sourcelist_empty $apt_sourceparts $apt_timeout_opts $apt_verify_opts download "$package" || { apt_get_download_exit_code="$?" ; true; };
+      if [ "$apt_get_download_exit_code" = "0" ]; then
+         downloaded[$package]="1"
+      else
+         downloaded[$package]="0"
+         local MSG="ERROR: Download of $package failed. (apt_get_download_exit_code: $apt_get_download_exit_code)"
+         true "$MSG"
+         error "$MSG"
+      fi
    fi
 }
 
@@ -155,13 +165,17 @@ fi
          true "INFO: $script not executable."
       else
          download_package "$package"
-         true "INFO: Running... $script remove"
-         export DPKG_MAINTSCRIPT_PACKAGE="$package"
-         ## TODO: export DPKG_MAINTSCRIPT_ARCH="?"
-         export DPKG_MAINTSCRIPT_NAME="prerm"
-         ## Example:
-         ## /var/lib/dpkg/info/fontconfig.prerm remove
-         "$script" remove
+         if [ "${downloaded[$package]}" = "1" ]; then
+            true "INFO: Running... $script remove"
+            export DPKG_MAINTSCRIPT_PACKAGE="$package"
+            ## TODO: export DPKG_MAINTSCRIPT_ARCH="?"
+            export DPKG_MAINTSCRIPT_NAME="prerm"
+            ## Example:
+            ## /var/lib/dpkg/info/fontconfig.prerm remove
+            "$script" remove
+         else
+            true "WARNING: Skipping running $script remove, because $package could not be downloaded. This will likely break the verifiable builds feature."
+         fi
       fi
    done
 
@@ -177,13 +191,17 @@ fi
          true "INFO: $script not executable."
       else
          download_package "$package"
-         export DPKG_MAINTSCRIPT_PACKAGE="$package"
-         ## TODO: export DPKG_MAINTSCRIPT_ARCH="?"
-         export DPKG_MAINTSCRIPT_NAME="postrm"
-         true "INFO: Running... $script purge"
-         ## Example:
-         ## /var/lib/dpkg/info/fontconfig.postrm purge
-         "$script" purge
+         if [ "${downloaded[$package]}" = "1" ]; then
+            export DPKG_MAINTSCRIPT_PACKAGE="$package"
+            ## TODO: export DPKG_MAINTSCRIPT_ARCH="?"
+            export DPKG_MAINTSCRIPT_NAME="postrm"
+            true "INFO: Running... $script purge"
+            ## Example:
+            ## /var/lib/dpkg/info/fontconfig.postrm purge
+            "$script" purge
+         else
+            true "WARNING: Skipping running $script purge, because $package could not be downloaded. This will likely break the verifiable builds feature."
+         fi
       fi
    done
 
