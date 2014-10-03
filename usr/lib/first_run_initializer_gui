@@ -74,6 +74,12 @@ fake_progress_bar() {
 log_file="/root/.whonix/first_run_initializer.log"
 start_file="/root/.whonix/first_run_initializer.start"
 done_file="/root/.whonix/first_run_initializer.done"
+skip_file="/root/.whonix/first_run_initializer.skip"
+
+## Check if a custom builder not using the cleanup chroot script wants to skip.
+if [ -f "$skip_file" ]; then
+   exit 0
+fi
 
 ## Check if Whonix First Run Initializer already finished, exit if so.
 if [ -f "$done_file" ]; then
