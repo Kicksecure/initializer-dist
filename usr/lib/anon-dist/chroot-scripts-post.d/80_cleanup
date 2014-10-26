@@ -40,8 +40,8 @@ done
 unset skip_script
 
 ## Enable apt-cacher-ng proxy.
-if [ "$(type -t maybe_enable_apt_cache)" = "function" ]; then
-   maybe_enable_apt_cache
+if [ "$(type -t apt_cache_maybe_enable)" = "function" ]; then
+   apt_cache_maybe_enable
 fi
 
 ## {{{ variables
