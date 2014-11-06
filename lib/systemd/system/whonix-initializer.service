@@ -17,7 +17,7 @@ Before=whonixcheck
 ConditionKernelCommandLine=!rd.live.image
 
 [Service]
-Type=forking
+Type=oneshot
 #ExecStartPre=-/bin/plymouth quit
 #ExecStartPre=/bin/kill -55 1
 ExecStart=/usr/lib/first_run_initializer_gui
