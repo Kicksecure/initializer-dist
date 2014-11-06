@@ -16,15 +16,16 @@ ConditionKernelCommandLine=!rd.live.image
 
 [Service]
 Type=oneshot
-ExecStartPre=-/bin/plymouth quit
-ExecStartPre=/bin/kill -55 1
+#ExecStartPre=-/bin/plymouth quit
+#ExecStartPre=/bin/kill -55 1
 ExecStart=/usr/lib/first_run_initializer_gui
-ExecStartPost=/bin/kill -54 1
+#ExecStartPost=/bin/kill -54 1
 TimeoutSec=0
 RemainAfterExit=yes
 SysVStartPriority=99
-StandardInput=tty
+#StandardInput=tty
 StandardOutput=tty
+StandardError=tty
 
 [Install]
 WantedBy=multi-user.target
