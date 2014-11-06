@@ -14,19 +14,19 @@ set -o pipefail
 first_run_initializer_exit_code="0"
 
 error_handler() {
-   true "ERROR: exited with non-zero exit code: $?"
+   true "$output_identifier ERROR: exited with non-zero exit code: $?"
    first_run_initializer_exit_code="1"
 }
 
 trap "error_handler" ERR
 
-true "INFO: Running Whonix First Run Initializer..."
+true "$output_identifier INFO: Running Whonix First Run Initializer..."
 
 if [ "$(id -u)" != "0" ]; then
-    echo "ERROR: This must be run as root (sudo)!"
+    echo "$output_identifier ERROR: This must be run as root (sudo)!"
     exit 1
 else
-    true "INFO: Script running as root."
+    true "$output_identifier INFO: Script running as root."
 fi
 
 export DEBIAN_FRONTEND="noninteractive"
@@ -49,13 +49,14 @@ ls -la /var/lib/dpkg/lock || true
 ps aux | grep dpkg || true
 
 true "\
+$output_identifier
 INFO: Running dpkg --install /var/lib/whonix/initial-packages/* for the first time...
       The errors:
       - update-xmlcatalog: error: root catalog /etc/xml/catalog not found
       - update-xmlcatalog: error: package catalog /etc/xml/docbook-xml.xml not found
       are expected and can be ignored. When running dpkg for the second time, they will be gone."
 dpkg --install "/var/lib/whonix/initial-packages/"* || true
-true "INFO: Done running dpkg for the first time."
+true "$output_identifier INFO: Done running dpkg for the first time."
 
 ## Debugging.
 ls -la /var/lib/dpkg/lock
@@ -64,10 +65,10 @@ ps aux | grep dpkg || true
 ## This may not be necessary.
 ## Re-running the same command, so we can see in the log, if it runs without
 ## any warnings the second time.
-true "Running dpkg --install /var/lib/whonix/initial-packages/* for the \
+true "$output_identifier INFO: Running dpkg --install /var/lib/whonix/initial-packages/* for the \
 second and final time..."
 dpkg --install "/var/lib/whonix/initial-packages/"*
-true "INFO: Done running dpkg for the second and final time."
+true "$output_identifier INFO: Done running dpkg for the second and final time."
 
 ## }}}
 
@@ -91,13 +92,13 @@ apt-key update
 ## /var/cache/debconf/config.dat
 ## Reconfigure all packages.
 #for pkg in $(dpkg-query --show --showformat='${Package} '); do
-   #echo "reconfiguring $pkg..."
+   #echo "$output_identifier reconfiguring $pkg..."
    #dpkg-reconfigure --frontend=noninteractive "$pkg"
-   #echo "reconfigured $pkg."
+   #echo "$output_identifier reconfigured $pkg."
 #done
 
 dpkg --configure -a
 
-true "INFO: End of First Run Initializer."
+true "$output_identifier INFO: End of First Run Initializer."
 
 exit "$first_run_initializer_exit_code"

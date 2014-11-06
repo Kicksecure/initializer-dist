@@ -9,11 +9,14 @@
 
 #set -x
 
+output_identifier="$(uuidgen)"
+export output_identifier
+
 if [ "$(id -u)" != "0" ]; then
-    echo "ERROR: This must be run as root (sudo)!"
+    echo "$output_identifier ERROR: This must be run as root (sudo)!"
     exit 1
 else
-    true "INFO: Script running as root."
+    true "$output_identifier INFO: Script running as root."
 fi
 
 colors() {
@@ -97,7 +100,7 @@ fi
 ## running apt-get. If the environment variable DPKG_MAINTSCRIPT_PACKAGE is
 ## set, then this script was started by apt-get -> dpkg -> invoke-rc.d.
 if [ ! "$DPKG_MAINTSCRIPT_PACKAGE" = "" ]; then
-   echo "INFO $0: Run by package manager. Exiting. Ok."
+   echo "$output_identifier INFO $0: Run by package manager. Exiting. Ok."
    exit 0
 fi
 
@@ -111,6 +114,7 @@ sync
 colors
 
 echo "\
+$output_identifier
 [${cyan}${bold}INFO${reset}] [${cyan}Whonix First Run Initializer${reset}]: Preparing Whonix... Will reboot when finished...
        ${cyan}${under}Do not interrupt this process or your system might be unstable!${reset}
        ${under}This may take a while...${reset}"
@@ -131,9 +135,10 @@ touch "$done_file"
 sync
 
 if [ "$first_run_initializer_exit_code" = "0" ]; then
-   echo "[${cyan}${bold}INFO${reset}] [${cyan}Whonix First Run Initializer${reset}]: Done. Rebooting... ${under}This may take a while...${eunder}"
+   echo "$output_identifier [${cyan}${bold}INFO${reset}] [${cyan}Whonix First Run Initializer${reset}]: Done. Rebooting... ${under}This may take a while...${eunder}"
 else
    echo "\
+$output_identifier
 [${red}${bold}ERROR${reset}] [${cyan}Whonix First Run Initializer${reset}]: Error!
         ${under}Please report this Whonix bug! Submit Whonix First Run Initializer's${reset}
         ${under}log file $log_file to Whonix developers!${reset}
@@ -151,7 +156,8 @@ if [ "$CI" = "true" ]; then
    ## Otherwise you'll run into...
    ## "I'm sorry but there was an error with the connection to the VM.
    ## Your job will be requeued shortly."
-   echo "[${cyan}${bold}INFO${reset}] [${cyan}Whonix First Run Initializer${reset}]: CI detected. Skipping reboot."
+   echo "$output_identifier
+[${cyan}${bold}INFO${reset}] [${cyan}Whonix First Run Initializer${reset}]: CI detected. Skipping reboot."
 else
    reboot & disown
 fi
@@ -161,7 +167,8 @@ sleep 60 &
 sleeppid_three="$!"
 fake_progress_bar
 
-echo "[${red}${bold}ERROR${reset}] [${cyan}Whonix First Run Initializer${reset}]: Rebooting not done after 60 seconds. Please report this Whonix bug!"
+echo "$output_identifier
+[${red}${bold}ERROR${reset}] [${cyan}Whonix First Run Initializer${reset}]: Rebooting not done after 60 seconds. Please report this Whonix bug!"
 
 ## Sleep, so this message has a chance of being read.
 sleep 10 &
