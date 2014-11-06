@@ -97,6 +97,10 @@ apt-key update
    #echo "$output_identifier reconfigured $pkg."
 #done
 
+## Debugging.
+ls -la /var/lib/dpkg/lock
+ps aux | grep dpkg || true
+
 dpkg --configure -a
 
 true "$output_identifier INFO: End of First Run Initializer."
