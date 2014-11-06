@@ -9,6 +9,13 @@
 
 #set -x
 
+if [ "$(id -u)" != "0" ]; then
+    echo "ERROR: This must be run as root (sudo)!"
+    exit 1
+else
+    true "INFO: Script running as root."
+fi
+
 colors() {
    ## Thanks to:
    ## http://mywiki.wooledge.org/BashFAQ/037
