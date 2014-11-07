@@ -13,10 +13,10 @@ output_identifier="$(uuidgen)"
 export output_identifier
 
 if [ "$(id -u)" != "0" ]; then
-    echo "$output_identifier ERROR: This must be run as root (sudo)!"
-    exit 1
+   echo "$output_identifier ERROR: This must be run as root (sudo)!"
+   exit 1
 else
-    true "$output_identifier INFO: Script running as root."
+   true "$output_identifier INFO: Script running as root."
 fi
 
 colors() {
