@@ -85,8 +85,16 @@ log_file="/root/.whonix/first_run_initializer.log"
 start_file="/root/.whonix/first_run_initializer.start"
 done_file="/root/.whonix/first_run_initializer.done"
 skip_file="/root/.whonix/first_run_initializer.skip"
+todo_file="/root/.whonix/first_run_initializer.todo"
 
-## Check if a custom builder not using the cleanup chroot script wants to skip.
+## Check if a custom builder even had the verifiable builds option enabled,
+## that may or may not have created the todo file.
+if [ ! -f "$todo_file" ]; then
+   true "$output_identifier INFO: todo_file $todo_file does not exist, exiting."
+   exit 0
+fi
+
+## Check if a custom builder wants to skip this (for debugging purposes).
 if [ -f "$skip_file" ]; then
    exit 0
 fi
@@ -134,6 +142,7 @@ wait "$first_run_initializer_pid"
 first_run_initializer_exit_code="$?"
 
 touch "$done_file"
+rm --force "$todo_file"
 sync
 
 if [ "$first_run_initializer_exit_code" = "0" ]; then
