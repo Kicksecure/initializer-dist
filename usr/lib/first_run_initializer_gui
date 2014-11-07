@@ -99,6 +99,8 @@ fi
 ## Extra precaution against this script getting automatically by dpkg after
 ## running apt-get. If the environment variable DPKG_MAINTSCRIPT_PACKAGE is
 ## set, then this script was started by apt-get -> dpkg -> invoke-rc.d.
+## Unfortunately, works with sysvinit. Not with systemd.
+## https://unix.stackexchange.com/questions/166450/preserve-environment-variables-using-systemd
 if [ ! "$DPKG_MAINTSCRIPT_PACKAGE" = "" ]; then
    echo "$output_identifier INFO $0: Run by package manager. Exiting. Ok."
    exit 0
