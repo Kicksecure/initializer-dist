@@ -90,17 +90,19 @@ todo_file="/root/.whonix/first_run_initializer.todo"
 ## Check if a custom builder even had the verifiable builds option enabled,
 ## that may or may not have created the todo file.
 if [ ! -f "$todo_file" ]; then
-   true "$output_identifier INFO: todo_file $todo_file does not exist, exiting."
+   true "$output_identifier INFO: todo_file $todo_file does not exist. Exiting."
    exit 0
 fi
 
 ## Check if a custom builder wants to skip this (for debugging purposes).
 if [ -f "$skip_file" ]; then
+   true "$output_identifier INFO: skip_file $skip_file exist. Exiting."
    exit 0
 fi
 
 ## Check if Whonix First Run Initializer already finished, exit if so.
 if [ -f "$done_file" ]; then
+   true "$output_identifier INFO: done_file $done_file exist. Exiting."
    exit 0
 fi
 
@@ -186,4 +188,5 @@ sleep 10 &
 sleeppid_four="$!"
 fake_progress_bar
 
+true "$output_identifier INFO: End. Exiting."
 exit 0
