@@ -7,7 +7,9 @@
 #export DH_VERBOSE=1
 
 %:
-	dh $@ --with systemd
+	## TODO: use "--with systemd" when porting to jessie.
+	#dh $@ --with systemd
+	dh $@
 
 override_dh_install:
 	dh_installinit --onlyscripts
