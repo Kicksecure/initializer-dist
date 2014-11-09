@@ -17,13 +17,13 @@ error_handler() {
 }
 
 ## {{ Set up error handler.
-if [ "$(type -t error_handler_general)" = "function" ]; then
-   ## Function error_handler_general exists (declared in
+if [ "$(type -t errorhandlergeneral)" = "function" ]; then
+   ## Function errorhandlergeneral exists (declared in
    ## help-steps/pre). Prefer to use the more feature rich version of the error
    ## handler.
-   trap "error_handler_general" ERR
+   trap "errorhandlergeneral" ERR
 else
-   ## Function error_handler_general does not exist. Script
+   ## Function errorhandlergeneral does not exist. Script
    ## runs standalone outside the build script. Fall back to a simpler error
    ## handler.
    trap "error_handler" ERR
@@ -40,8 +40,8 @@ done
 unset skip_script
 
 ## Enable apt-cacher-ng proxy.
-if [ "$(type -t apt_cache_maybe_enable)" = "function" ]; then
-   apt_cache_maybe_enable
+if [ "$(type -t aptcachemaybeenable)" = "function" ]; then
+   aptcachemaybeenable
 fi
 
 ## {{{ variables
@@ -73,13 +73,13 @@ declare -A -g downloaded
 
 download_package() {
    ## {{ Set up error handler.
-if [ "$(type -t error_handler_general)" = "function" ]; then
-   ## Function error_handler_general exists (declared in
+if [ "$(type -t errorhandlergeneral)" = "function" ]; then
+   ## Function errorhandlergeneral exists (declared in
    ## help-steps/pre). Prefer to use the more feature rich version of the error
    ## handler.
-   trap "error_handler_general" ERR
+   trap "errorhandlergeneral" ERR
 else
-   ## Function error_handler_general does not exist. Script
+   ## Function errorhandlergeneral does not exist. Script
    ## runs standalone outside the build script. Fall back to a simpler error
    ## handler.
    trap "error_handler" ERR
@@ -107,13 +107,13 @@ fi
 
 maybe_rm() {
    ## {{ Set up error handler.
-if [ "$(type -t error_handler_general)" = "function" ]; then
-   ## Function error_handler_general exists (declared in
+if [ "$(type -t errorhandlergeneral)" = "function" ]; then
+   ## Function errorhandlergeneral exists (declared in
    ## help-steps/pre). Prefer to use the more feature rich version of the error
    ## handler.
-   trap "error_handler_general" ERR
+   trap "errorhandlergeneral" ERR
 else
-   ## Function error_handler_general does not exist. Script
+   ## Function errorhandlergeneral does not exist. Script
    ## runs standalone outside the build script. Fall back to a simpler error
    ## handler.
    trap "error_handler" ERR
@@ -129,13 +129,13 @@ fi
 
 maybe_run() {
    ## {{ Set up error handler.
-if [ "$(type -t error_handler_general)" = "function" ]; then
-   ## Function error_handler_general exists (declared in
+if [ "$(type -t errorhandlergeneral)" = "function" ]; then
+   ## Function errorhandlergeneral exists (declared in
    ## help-steps/pre). Prefer to use the more feature rich version of the error
    ## handler.
-   trap "error_handler_general" ERR
+   trap "errorhandlergeneral" ERR
 else
-   ## Function error_handler_general does not exist. Script
+   ## Function errorhandlergeneral does not exist. Script
    ## runs standalone outside the build script. Fall back to a simpler error
    ## handler.
    trap "error_handler" ERR
