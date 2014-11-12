@@ -1,3 +1,9 @@
+whonix-initializer (3:0.9-1) unstable; urgency=low
+
+  * New upstream version.
+
+ -- Patrick Schleizer <adrelanos@riseup.net>  Wed, 12 Nov 2014 00:56:23 +0000
+
 whonix-initializer (3:0.8-1) unstable; urgency=low
 
   * New upstream version.
