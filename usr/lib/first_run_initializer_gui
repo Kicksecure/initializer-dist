@@ -10,10 +10,10 @@ output_identifier="$$"
 export output_identifier
 
 if [ "$(id -u)" != "0" ]; then
-   echo "$output_identifier ERROR: This must be run as root (sudo)!"
+   echo "($output_identifier) ERROR: This must be run as root (sudo)!"
    exit 1
 else
-   true "$output_identifier INFO: Script running as root."
+   true "($output_identifier) INFO: Script running as root."
 fi
 
 colors() {
@@ -87,19 +87,19 @@ todo_file="/root/.whonix/first_run_initializer.todo"
 ## Check if a custom builder even had the verifiable builds option enabled,
 ## that may or may not have created the todo file.
 if [ ! -f "$todo_file" ]; then
-   true "$output_identifier INFO: todo_file $todo_file does not exist. Exiting."
+   true "($output_identifier) INFO: todo_file $todo_file does not exist. Exiting."
    exit 0
 fi
 
 ## Check if a custom builder wants to skip this (for debugging purposes).
 if [ -f "$skip_file" ]; then
-   true "$output_identifier INFO: skip_file $skip_file exist. Exiting."
+   true "($output_identifier) INFO: skip_file $skip_file exist. Exiting."
    exit 0
 fi
 
 ## Check if Whonix First Run Initializer already finished, exit if so.
 if [ -f "$done_file" ]; then
-   true "$output_identifier INFO: done_file $done_file exist. Exiting."
+   true "($output_identifier) INFO: done_file $done_file exist. Exiting."
    exit 0
 fi
 
@@ -109,7 +109,7 @@ fi
 ## Unfortunately, works with sysvinit. Not with systemd.
 ## https://unix.stackexchange.com/questions/166450/preserve-environment-variables-using-systemd
 if [ ! "$DPKG_MAINTSCRIPT_PACKAGE" = "" ]; then
-   echo "$output_identifier INFO $0: Run by package manager. Exiting. Ok."
+   echo "($output_identifier) INFO $0: Run by package manager. Exiting. Ok."
    exit 0
 fi
 
@@ -123,8 +123,7 @@ sync
 colors
 
 echo "\
-$output_identifier
-[${cyan}${bold}INFO${reset}] [${cyan}Whonix First Run Initializer${reset}]: Preparing Whonix... Will reboot when finished...
+[${cyan}${bold}INFO${reset}] [${cyan}Whonix First Run Initializer${reset}]: ($output_identifier) Preparing Whonix... Will reboot when finished...
        ${cyan}${under}Do not interrupt this process or your system might be unstable!${reset}
        ${under}This may take a while...${reset}"
 
@@ -145,11 +144,10 @@ rm --force "$todo_file"
 sync
 
 if [ "$first_run_initializer_exit_code" = "0" ]; then
-   echo "$output_identifier [${cyan}${bold}INFO${reset}] [${cyan}Whonix First Run Initializer${reset}]: Done. Rebooting... ${under}This may take a while...${eunder}"
+   echo "($output_identifier) [${cyan}${bold}INFO${reset}] [${cyan}Whonix First Run Initializer${reset}]: Done. Rebooting... ${under}This may take a while...${eunder}"
 else
    echo "\
-$output_identifier
-[${red}${bold}ERROR${reset}] [${cyan}Whonix First Run Initializer${reset}]: Error!
+[${red}${bold}ERROR${reset}] [${cyan}Whonix First Run Initializer${reset}]: ($output_identifier) Error!
         ${under}Please report this Whonix bug! Submit Whonix First Run Initializer's${reset}
         ${under}log file $log_file to Whonix developers!${reset}
         Rebooting... ${under}This may take a while...${reset}"
@@ -166,8 +164,7 @@ if [ "$CI" = "true" ]; then
    ## Otherwise you'll run into...
    ## "I'm sorry but there was an error with the connection to the VM.
    ## Your job will be requeued shortly."
-   echo "$output_identifier
-[${cyan}${bold}INFO${reset}] [${cyan}Whonix First Run Initializer${reset}]: CI detected. Skipping reboot."
+   echo "($output_identifier) [${cyan}${bold}INFO${reset}] [${cyan}Whonix First Run Initializer${reset}]: CI detected. Skipping reboot."
 else
    reboot & disown
 fi
@@ -177,13 +174,12 @@ sleep 60 &
 sleeppid_three="$!"
 fake_progress_bar
 
-echo "$output_identifier
-[${red}${bold}ERROR${reset}] [${cyan}Whonix First Run Initializer${reset}]: Rebooting not done after 60 seconds. Please report this Whonix bug!"
+echo "($output_identifier) [${red}${bold}ERROR${reset}] [${cyan}Whonix First Run Initializer${reset}]: Rebooting not done after 60 seconds. Please report this Whonix bug!"
 
 ## Sleep, so this message has a chance of being read.
 sleep 10 &
 sleeppid_four="$!"
 fake_progress_bar
 
-true "$output_identifier INFO: End. Exiting."
+true "($output_identifier) INFO: End. Exiting."
 exit 0
