@@ -6,7 +6,7 @@
 
 #set -x
 
-output_identifier="$(uuidgen)"
+output_identifier="$$"
 export output_identifier
 
 if [ "$(id -u)" != "0" ]; then
