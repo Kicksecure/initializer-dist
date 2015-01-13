@@ -122,6 +122,11 @@ mkdir --parents "/var/lib/whonix-initializer/status-files/"
 ## Log, that Whonix First Run Initializer attempted to start. This is useful in
 ## eventual case of bug reports.
 touch "$start_file"
+
+## In case the done_file has been manually removed to re-run whonix-initializer
+## (for debugging purposes or so), also delete the fail_file.
+rm --force "$fail_file"
+
 sync
 
 colors
