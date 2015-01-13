@@ -65,7 +65,7 @@ if [ "$DPKG_NO_TSTP" = "" ]; then
    export DPKG_NO_TSTP="yes"
 fi
 
-todo_file="/root/.whonix/first_run_initializer.todo"
+todo_file="/var/lib/whonix-initializer/status-files/first_run_initializer.todo"
 
 ## }}}
 
@@ -218,7 +218,7 @@ if [ "$whonix_build_script_skip_verifiable" = "1" ]; then
    true "INFO: whonix_build_script_skip_verifiable is set to 1, skipping creation of todo_file $todo_file, ok."
 else
    true "INFO: whonix_build_script_skip_verifiable is not set to 1, creating todo_file $todo_file..."
-   mkdir --parents "/root/.whonix/"
+   mkdir --parents "/var/lib/whonix-initializer/status-files/"
    touch "$todo_file"
    true "INFO: Created todo_file $todo_file."
 fi

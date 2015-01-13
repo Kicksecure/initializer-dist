@@ -76,14 +76,13 @@ fake_progress_bar() {
    done
 }
 
-## need to use hardcoded "/root/" instead of "~/", because "~/" does not exist
-## when run through an init script.
-log_file="/root/.whonix/first_run_initializer.log"
-start_file="/root/.whonix/first_run_initializer.start"
-done_file="/root/.whonix/first_run_initializer.done"
-skip_file="/root/.whonix/first_run_initializer.skip"
-todo_file="/root/.whonix/first_run_initializer.todo"
-fail_file="/root/.whonix/first_run_initializer.fail"
+log_file="/var/lib/whonix-initializer/status-files/first_run_initializer.log"
+start_file="/var/lib/whonix-initializer/status-files/first_run_initializer.start"
+done_file="/var/lib/whonix-initializer/status-files/first_run_initializer.done"
+done_file_compatiblity="/root/.whonix/first_run_initializer.done"
+skip_file="/var/lib/whonix-initializer/status-files/first_run_initializer.skip"
+todo_file="/var/lib/whonix-initializer/status-files/first_run_initializer.todo"
+fail_file="/var/lib/whonix-initializer/status-files/first_run_initializer.fail"
 
 ## Check if a custom builder even had the verifiable builds option enabled,
 ## that may or may not have created the todo file.
@@ -103,6 +102,10 @@ if [ -f "$done_file" ]; then
    true "($output_identifier) INFO: done_file $done_file exist. Exiting."
    exit 0
 fi
+if [ -f "$done_file_compatiblity" ]; then
+   true "($output_identifier) INFO: done_file_compatiblity $done_file_compatiblity exist. Exiting."
+   exit 0
+fi
 
 ## Extra precaution against this script getting automatically by dpkg after
 ## running apt-get. If the environment variable DPKG_MAINTSCRIPT_PACKAGE is
@@ -114,7 +117,7 @@ if [ ! "$DPKG_MAINTSCRIPT_PACKAGE" = "" ]; then
    exit 0
 fi
 
-mkdir --parents "/root/.whonix/"
+mkdir --parents "/var/lib/whonix-initializer/status-files/"
 
 ## Log, that Whonix First Run Initializer attempted to start. This is useful in
 ## eventual case of bug reports.
