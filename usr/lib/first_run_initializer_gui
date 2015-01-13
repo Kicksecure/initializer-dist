@@ -168,6 +168,7 @@ if [ "$CI" = "true" ]; then
    ## "I'm sorry but there was an error with the connection to the VM.
    ## Your job will be requeued shortly."
    echo "($output_identifier) [${cyan}${bold}INFO${reset}] [${cyan}Whonix First Run Initializer${reset}]: CI detected. Skipping reboot."
+   exit 0
 else
    reboot & disown
 fi
