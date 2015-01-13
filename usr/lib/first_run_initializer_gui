@@ -83,6 +83,7 @@ start_file="/root/.whonix/first_run_initializer.start"
 done_file="/root/.whonix/first_run_initializer.done"
 skip_file="/root/.whonix/first_run_initializer.skip"
 todo_file="/root/.whonix/first_run_initializer.todo"
+fail_file="/root/.whonix/first_run_initializer.fail"
 
 ## Check if a custom builder even had the verifiable builds option enabled,
 ## that may or may not have created the todo file.
@@ -151,6 +152,8 @@ else
         ${under}Please report this Whonix bug! Submit Whonix First Run Initializer's${reset}
         ${under}log file $log_file to Whonix developers!${reset}
         Rebooting... ${under}This may take a while...${reset}"
+   touch "$fail_file"
+   echo "$first_run_initializer_exit_code" > "$fail_file"
 fi
 
 ## The sleep is just in for the look an feel.
