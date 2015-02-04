@@ -1,0 +1,453 @@
+commit dc32758d9f8eb5c50864da65d25f0228042bc184
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Wed Feb 4 00:41:01 2015 +0000
+
+    updated makefile generic to version 1.3
+
+commit 03929436acc24b7647d8009d50b54304d22194f9
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Tue Feb 3 23:59:01 2015 +0000
+
+    Added creation of upstream changelog to debian/rules
+
+commit 42862d627c6e3c1b9ad718b10ce5751a18b6cc15
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Tue Jan 13 20:40:10 2015 +0000
+
+    fix
+
+commit 49d0fa6a313bcc678cad2a0ac46d53ec581e7b6e
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Tue Jan 13 20:34:57 2015 +0000
+
+    changed status file dir from /root/.whonix/ to /var/lib/whonix-initializer/status-files/
+
+commit de070c8eb5002b9e8f073621075c602b074d6a60
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Tue Jan 13 19:51:05 2015 +0000
+
+    CI
+
+commit 1de3cd406c0e7e243eeae81c335de6b1dc4f7368
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Tue Jan 13 19:49:57 2015 +0000
+
+    add fail file in case first run initializer failed
+
+commit 22632b2cff3fd1cca5e9c6d6a8b1430ef98818a4
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Wed Jan 7 19:35:03 2015 +0000
+
+    bumped compat from 8 to 9
+
+commit 7d7c406c7d9873c99507193712b5b5aaa66d1a89
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Fri Dec 5 19:01:31 2014 +0000
+
+    updated generic makefile
+
+commit 9dff8f10c1c97b6f77e05d37cdf2da90534dfa6a
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sat Nov 15 12:46:10 2014 +0000
+
+    output
+
+commit bc8c7fe0af19b74514b309e8db810797130c5753
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sat Nov 15 12:41:09 2014 +0000
+
+    pid as identifier suffices
+
+commit f911487ca65b7c9aa18da0c7bc719a6452fad441
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Wed Nov 12 00:56:32 2014 +0000
+
+    bumped version number
+
+commit 36bdeb19d3ef15f4b777aaab2acab362acae6901
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sun Nov 9 15:02:08 2014 +0000
+
+    removed dh-sytemd from build depends, because dh-systemd is not available in wheezy
+
+commit 5b38bc58189015be04055aa617328b4900c640cc
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sun Nov 9 14:23:09 2014 +0000
+
+    workaround for "bash: Shellshock fix breaks bash function exporting" - https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=763164
+
+commit 6b33cfeec9d51fdd80cc2d2c7b25ff42fad75c8b
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sat Nov 8 11:35:36 2014 +0000
+
+    do not use "dh $@" with "--with systemd" yet, because dh-systemd is not available in wheezy
+
+commit 0ae656161198a9cc43b90a48bbf670db23afff63
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Fri Nov 7 08:23:36 2014 +0000
+
+    Removed obsolete comment.
+
+commit 376577af3ddfff11fa1ae58da1edb624725260f3
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Fri Nov 7 08:22:32 2014 +0000
+
+    output
+
+commit 7dda5edc0b73917ba965ee813bfe74702aec5642
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Fri Nov 7 08:20:52 2014 +0000
+
+    intent
+
+commit 63f7921eab2a367fa6da0e8105dc124de4d177bb
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Fri Nov 7 08:16:06 2014 +0000
+
+    Refactored implementation for later systemd support. The run of Whonix First Run Initializer (not the verifiable builds option yet) is now opt-in rather than opt-out. Unless the verifiable builds option is disabled when using the build script, a todo file will be created during the cleanup chroot script. When Whonix First Run Initializer later runs, it only proceeds if the todo file  exists. Thanks to nrgaway for the suggestion ( https://www.whonix.org/forum/index.php/topic,707.msg5310.html#msg5310 ).
+
+commit 26b5f9f08c3dce9bc5a6410eaf18413ed60f3af8
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Fri Nov 7 07:55:40 2014 +0000
+
+    comment
+
+commit 102451109c398b9353be5936971cd46802c07e5c
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu Nov 6 14:54:33 2014 +0000
+
+    work on systemd support
+
+commit 465ca1833832f6906e44e54b817fd9674fd11370
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu Nov 6 14:41:47 2014 +0000
+
+    debugging
+
+commit 31e03e5d737f19aba587dac1df7eb205bfb7eb72
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu Nov 6 14:39:55 2014 +0000
+
+    output
+
+commit 97a6afad65fc74c1fe4b65ad1985715a29f4abff
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu Nov 6 14:35:32 2014 +0000
+
+    work on systemd support
+
+commit dd693d9634230ab0e2c7b254946656c4f6297bd0
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu Nov 6 14:29:31 2014 +0000
+
+    work on systemd support
+
+commit 2c89f448695273c994bb8b9f7fc2f635b36c72e0
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu Nov 6 14:18:08 2014 +0000
+
+    work on systemd support
+
+commit b84c68e88e2c48f2b9169f82c3b3bab0db835449
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu Nov 6 13:51:11 2014 +0000
+
+    work on systemd support
+
+commit 2d2b7448fa9a1e6aeaf70650ceb145fc176ddaeb
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu Nov 6 13:08:12 2014 +0000
+
+    root check
+
+commit c57658adbea37595b292fb499160117c59f14712
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu Nov 6 11:35:14 2014 +0000
+
+    work on systemd support
+
+commit 7249f29cff7651ca4bb70018d4c879dc1f65aa41
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Tue Oct 28 22:35:34 2014 +0000
+
+    makefile: refactoring, avoid using IFS
+
+commit 10dbfc10e2578e81d7f9efa3dd7e635b8c7697b6
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sun Oct 26 16:26:02 2014 +0000
+
+    refactoring
+
+commit abdbb2399876261683ae02cb95965f6eb60da072
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sat Oct 25 01:58:55 2014 +0000
+
+    makefile:
+    - make debdist; make undebdist
+    - cleanup
+    - refactoring
+
+commit 044261039ad2068032e8e4c4e499facad2e852b1
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu Oct 23 22:43:06 2014 +0000
+
+    makefile:
+    - new target "make undist", which deletes the upstream tarball
+    - $DISTDIR variable for make (un)dist, which defaults to ".." and can be used to create upstream tarballs in arbitrary locations
+    - refactoring, all function names and global variables now start with "make_" to make the script `source`ing friendly
+    - made `source`able
+
+commit 02b8655adac71134217d5cdaae57cbd81e48f2c9
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Oct 13 12:37:00 2014 +0000
+
+    readme
+
+commit 0cf3dcfc64ae5e9685310c50d0ba7bf7e6f62901
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Fri Oct 3 22:19:15 2014 +0000
+
+    implemented check for skip file /root/.whonix/first_run_initializer.skip
+
+commit 98ad409fad5caa95bbb963d5abc937399c13cd5f
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Sep 8 11:55:01 2014 +0000
+
+    whonix-initializer: cleanup chroot script: fix, better handling in case download_package failed while the error is skipped as per https://www.whonix.org/forum/index.php/topic,488.msg3861.html#msg3861
+
+commit 421aabbded2096ca4e4dc3842a0b7c837aad95e1
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Tue Aug 19 18:52:46 2014 +0000
+
+    makefile: added new feature "make deb-chl-bumpup" - Bump upstream version number in debian/changelog.
+
+commit 978a1fb19cc0afdad88bb82cc763bd1e31984cba
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sun Aug 17 20:54:28 2014 +0000
+
+    Updated debian/changelog.
+
+commit f870220082b85d97c8e993a92ed86c71cda7989f
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sun Aug 17 20:47:31 2014 +0000
+
+    Fixed changelog date.
+
+commit bc96fdc98d22337076b86c05faf5621f2b5c70ae
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sun Aug 17 18:03:33 2014 +0000
+
+    bump version number
+
+commit 93855650f6e8ebb237abfd145f533daf63f9b5e9
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu Aug 14 13:35:22 2014 +0000
+
+    Implemented make deb-icup: Combination of make deb-pkg, make deb-pkg-install and make deb-pkg-cleanup.
+
+commit 65825efbb370df2ba2b3e500a706a2f9421e31af
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Tue Aug 12 14:36:47 2014 +0000
+
+    refactoring
+
+commit 64957ae8141ceef6dc55c20dc638bcdfb6a19ef7
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Tue Aug 12 14:36:07 2014 +0000
+
+    refactoring
+
+commit 87c472d9ee485833a6d4e1074e38eaa5880aff8d
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Tue Aug 12 14:34:05 2014 +0000
+
+    comment
+
+commit 5cc1480c95164b62200270f728fb1c1b64deb3a4
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Aug 11 13:09:37 2014 +0000
+
+    .
+
+commit 621424cd4cba368900e4ce28d5da4e6525f4e7ba
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Jul 28 23:25:47 2014 +0000
+
+    readme
+
+commit db6aca12dd31fc01f59e504afe1dfd0b710b9648
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sun Jul 27 12:42:31 2014 +0000
+
+    packaging
+
+commit 360d075bd567aac41dcd8b249979a05b20beb864
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sun Jul 27 04:01:16 2014 +0000
+
+    packaging
+
+commit 2b7a30693e4c270b7951cce5a521a0af0eec3efb
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sat Jul 26 15:26:42 2014 +0000
+
+    packaging
+
+commit 0f0574f81b59c7c07b250714554cc57022d68e5e
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sat Jul 26 15:16:09 2014 +0000
+
+    packaging: removed build dependency on git, since the .git folder won't be included in the upstream tarball.
+
+commit 237b476f8ad53618b3b50d019e9260fdfb3f31ce
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sat Jul 26 12:28:00 2014 +0000
+
+    fix lintian warning
+
+commit aee81177bf5497179e4bcd13a827ea955741e7a1
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Jul 14 01:36:34 2014 +0000
+
+    quotes
+
+commit 882bbda56c4639b34525582ea8ca7d64b27bcfad
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sat Jul 12 17:11:05 2014 +0000
+
+    packaging
+
+commit 54cca806129e1364a364fe71ff673c0b989d916d
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sat Jul 12 15:34:22 2014 +0000
+
+    packaging
+
+commit ae74a384fc77f8e16065fddaaf53da246197932b
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sun Jul 6 13:31:37 2014 +0000
+
+    quotes
+
+commit d2873e0082fcb5853ffb8ac1d34e257bb2d1b7d2
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sun Jul 6 13:28:28 2014 +0000
+
+    use $BASH_SOURCE instead of $0
+
+commit 2262f659a35e820b79b35efbd1dd0585954afebf
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sat Jul 5 08:11:02 2014 +0000
+
+    Bumped debian revision number to avoid lintian warning "new-package-should-close-itp-bug" so we can use lintian --fail-on-warnings as sanity test.
+
+commit 11ace5bd13ce1484b7088d17fc0ee725f0470f2c
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Tue Jun 24 15:45:15 2014 +0000
+
+    added debian epoch; added dotglob
+
+commit f33a8658761fcfe93cc0568b040954e7d09fb824
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Tue Jun 24 14:03:44 2014 +0000
+
+    added /home/user/.tb/gpgtmpdir:
+    Only required when using the anon-shared-build-inst-tb chroot-post.d script.
+    No need to manually re-create it.
+    Gets automatically re-created on next run of tb-updater.
+
+commit 28448c41859f76154f236f4f61a43005d32db53a
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Tue Jun 24 00:31:01 2014 +0000
+
+    comment
+
+commit 3dcae6e3c69f21912fb61cb5781c3e20b3ed4b7f
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Jun 23 23:58:45 2014 +0000
+
+    output
+
+commit f05f6818e2a96cbccd262aefd1dbd893349c38f8
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Jun 23 22:31:46 2014 +0000
+
+    No longer deleting /var/cache/debconf/*, since it causes many issues. Such as.
+    When you run:
+        sudo dpkg-reconfigure console-data
+    and select
+       select select keymap from archlist
+    then it says
+       Looking for keymap to install: NONE
+
+commit 69b3bbbcfc78d6c758a65a045a423f02e0dd2f0d
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sat Jun 21 10:49:17 2014 +0000
+
+    fix
+
+commit 50b9bb2da4526d4596fb9298f196938debea46b7
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sat Jun 21 10:46:28 2014 +0000
+
+    fix
+
+commit 007d15ba5061c85fa2edb63c4ecf6cec3ceb2d00
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Fri Jun 20 21:23:02 2014 +0000
+
+    colors; output
+
+commit 08ff6609cbfa101f10f8ce62afdbeb1137ce6ced
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Fri Jun 20 17:27:18 2014 +0000
+
+    disable debugging by no longer `cat` /etc/blkid.tab / /etc/blkid.tab.old to avoid showing disk uuids
+
+commit 357e76c82e44a3858776488a113b834a8a351959
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Fri Jun 20 15:08:20 2014 +0000
+
+    fix
+
+commit 70ffa059de1a057f4a7336ca7ecce6557b0f513c
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Tue Jun 3 18:27:40 2014 +0000
+
+    readme
+
+commit 6524c149e405e41e1664502aac7b5d3c8a922bc8
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Jun 2 14:40:39 2014 +0000
+
+    improved package description
+
+commit eda320ea29d02169bcce7aeab4cc4274be516e08
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sun Jun 1 15:38:57 2014 +0000
+
+    readme
+
+commit a565890101d84aa7e79e096db28b917dbd9e2f04
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sat May 31 11:23:53 2014 +0000
+
+    start whonix-initializer using /etc/init.d/whonix-initializer instead of depending on whonixsetup or /etc/profile.d for this
+
+commit e1820e8103f21e768c4e8945e3d056520c60f24d
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Wed May 28 14:31:10 2014 +0000
+
+    let whonixsetup autostart Whonix first run initializer
+
+commit f12ae41056956b1ed338255fe6b899a31eb8dd27
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Wed May 28 14:24:38 2014 +0000
+
+    packaging
+
+commit b055e6d6f15ba93cfad721f870e56441dde3c817
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu May 8 13:54:29 2014 +0000
+
+    .
