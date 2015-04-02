@@ -7,7 +7,7 @@ Section: misc
 Priority: optional
 Maintainer: Patrick Schleizer <adrelanos@riseup.net>
 ## TODO: add dh-systemd when porting to jessie.
-Build-Depends: debhelper (>= 9), faketime
+Build-Depends: debhelper (>= 9), faketime, genmkfile
 Homepage: https://www.whonix.org/wiki/Verifiable_Builds
 Vcs-Browser: https://github.com/Whonix/whonix-initializer
 Vcs-Git: https://github.com/Whonix/whonix-initializer.git
