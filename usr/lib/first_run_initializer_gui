@@ -132,7 +132,7 @@ sync
 colors
 
 echo "\
-($output_identifier)\
+($output_identifier) \
 [${cyan}${bold}INFO${reset}] [${cyan}Whonix First Run Initializer${reset}]: Preparing Whonix... Will reboot when finished...
        ${cyan}${under}Do not interrupt this process or your system might be unstable!${reset}
        ${under}This may take a while...${reset}"
@@ -157,7 +157,7 @@ if [ "$first_run_initializer_exit_code" = "0" ]; then
    echo "($output_identifier) [${cyan}${bold}INFO${reset}] [${cyan}Whonix First Run Initializer${reset}]: Done. Rebooting... ${under}This may take a while...${eunder}"
 else
    echo "\
-($output_identifier)\
+($output_identifier) \
 [${red}${bold}ERROR${reset}] [${cyan}Whonix First Run Initializer${reset}]: Error!
         ${under}Please report this Whonix bug! Submit Whonix First Run Initializer's${reset}
         ${under}log file $log_file to Whonix developers!${reset}
