@@ -21,6 +21,7 @@ debugging() {
 error_handler() {
    true "$output_identifier ERROR: exited with non-zero exit code: $?"
    first_run_initializer_exit_code="1"
+   debugging || true
 }
 
 trap "error_handler" ERR
