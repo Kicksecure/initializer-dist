@@ -59,7 +59,7 @@ dpkg --install "/var/lib/whonix/initial-packages/"* || true
 true "$output_identifier INFO: Done running dpkg for the first time."
 
 ## Debugging.
-ls -la /var/lib/dpkg/lock
+ls -la /var/lib/dpkg/lock || true
 ps aux | grep dpkg || true
 
 ## This may not be necessary.
@@ -98,7 +98,7 @@ apt-key update
 #done
 
 ## Debugging.
-ls -la /var/lib/dpkg/lock
+ls -la /var/lib/dpkg/lock || true
 ps aux | grep dpkg || true
 
 dpkg --configure -a
