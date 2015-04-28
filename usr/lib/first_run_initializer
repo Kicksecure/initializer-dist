@@ -13,6 +13,11 @@ set -o pipefail
 
 first_run_initializer_exit_code="0"
 
+debugging() {
+   ls -la /var/lib/dpkg/lock || true
+   ps aux | grep dpkg || true
+}
+
 error_handler() {
    true "$output_identifier ERROR: exited with non-zero exit code: $?"
    first_run_initializer_exit_code="1"
@@ -44,9 +49,7 @@ export DEBIAN_FRONTEND="noninteractive"
 ## packages (for later re-installation at this point), which are not installed
 ## at that point.
 
-## Debugging.
-ls -la /var/lib/dpkg/lock || true
-ps aux | grep dpkg || true
+debugging
 
 true "\
 $output_identifier
@@ -58,9 +61,7 @@ INFO: Running dpkg --install /var/lib/whonix/initial-packages/* for the first ti
 dpkg --install "/var/lib/whonix/initial-packages/"* || true
 true "$output_identifier INFO: Done running dpkg for the first time."
 
-## Debugging.
-ls -la /var/lib/dpkg/lock || true
-ps aux | grep dpkg || true
+debugging
 
 ## This may not be necessary.
 ## Re-running the same command, so we can see in the log, if it runs without
@@ -97,9 +98,7 @@ apt-key update
    #echo "$output_identifier reconfigured $pkg."
 #done
 
-## Debugging.
-ls -la /var/lib/dpkg/lock || true
-ps aux | grep dpkg || true
+debugging
 
 dpkg --configure -a
 
