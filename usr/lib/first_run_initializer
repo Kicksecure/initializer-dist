@@ -16,6 +16,7 @@ first_run_initializer_exit_code="0"
 debugging() {
    ls -la /var/lib/dpkg/lock || true
    ps aux | grep dpkg || true
+   ps aux | grep apt-get || true
 }
 
 error_handler() {
