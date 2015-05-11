@@ -93,7 +93,7 @@ fi
    else
       true "INFO: Downloading $package..."
       local apt_get_download_exit_code="0"
-      apt-get $apt_sourcelist_empty $apt_sourceparts $apt_timeout_opts $apt_verify_opts download "$package" || { apt_get_download_exit_code="$?" ; true; };
+      apt-get $apt_sourcelist_empty $apt_sourceparts $apt_timeout_opts $apt_verify_opts $apt_misc_opts download "$package" || { apt_get_download_exit_code="$?" ; true; };
       if [ "$apt_get_download_exit_code" = "0" ]; then
          downloaded[$package]="1"
       else
