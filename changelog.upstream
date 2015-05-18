@@ -1,3 +1,15 @@
+commit 80dbb25732d58cab3a3abbe7634345d42848d4a5
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon May 18 11:50:29 2015 +0000
+
+    systemd unit: added 'Before=rads.service' to prevent output by rads mixing up with output by whonix-initializer and to prevent the login manager from starting before whonix-initializer rebooted the system
+
+commit 4681852940d530484761826788b26647b3656f13
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Fri May 15 20:31:51 2015 +0000
+
+    bumped changelog version
+
 commit ccf144049ef63640685a9a41a0de39b1251bf0ef
 Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Wed May 13 14:12:10 2015 +0000
