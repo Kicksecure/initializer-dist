@@ -1,3 +1,15 @@
+commit ace6738ef5ebb00ac5bc645d80577011b873e506
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Tue May 19 20:11:40 2015 +0000
+
+    systemd unit: added 'Before=control-port-filter-python.service'
+
+commit 835216ee7627dab7c12aeff435520310ffe43051
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon May 18 12:24:16 2015 +0000
+
+    bumped changelog version
+
 commit 80dbb25732d58cab3a3abbe7634345d42848d4a5
 Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Mon May 18 11:50:29 2015 +0000
