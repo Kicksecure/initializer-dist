@@ -13,6 +13,11 @@ Before=sdwdate.service
 Before=whonixcheck.service
 Before=rads.service
 Before=control-port-filter-python.service
+
+## Better look and feel.
+Before=tor.service
+After=swap-file-creator.service
+
 #Conflicts=plymouth-quit-wait.service
 #Conflicts=initial-setup-graphical.service
 #After=initial-setup-graphical.service
