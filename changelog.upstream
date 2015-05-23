@@ -1,3 +1,15 @@
+commit 0c1490942edd4c58207980785bb658afa163cb15
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sat May 23 18:38:36 2015 +0000
+
+    systemd unit: added 'Before=tor.service' and 'After=swap-file-creator.service' for better look and feel. - https://phabricator.whonix.org/T106
+
+commit 7e3bd9eacc9ca2caa61289f11bd819ae3a156983
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Tue May 19 20:13:28 2015 +0000
+
+    bumped changelog version
+
 commit ace6738ef5ebb00ac5bc645d80577011b873e506
 Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Tue May 19 20:11:40 2015 +0000
