@@ -348,6 +348,8 @@ rm /var/log/*.[0-9].gz || true
 ## Deletes /etc/system/sysinit.target.wants/systemd-timesyncd.service.
 ## Otherwise timedatectl still thinks systemd-timesyncd is enabled.
 timedatectl set-ntp false >/dev/null 2>&1 || true
+## Make sure it gets really deleted even if timedatectl does not work.
+rm --force /etc/systemd/system/sysinit.target.wants/systemd-timesyncd.service
 
 ## non-deterministic [0]
 ## /var/lib/dpkg/available
