@@ -115,8 +115,8 @@ else
 fi
 ## }}
 
-   if [ "$whonix_build_script_skip_verifiable" = "1" ]; then
-      true "INFO: whonix_build_script_skip_verifiable is set to 1, skipping rm $1, ok."
+   if [ ! "$whonix_build_script_verifiable" = "true" ]; then
+      true "INFO: whonix_build_script_verifiable is set not set to true, skipping rm $1, ok."
    else
       rm --force ${1+"$@"}
    fi
@@ -137,8 +137,8 @@ else
 fi
 ## }}
 
-   if [ "$whonix_build_script_skip_verifiable" = "1" ]; then
-      true "INFO: whonix_build_script_skip_verifiable is set to 1, skipping maybe_run $1, ok."
+   if [ ! "$whonix_build_script_verifiable" = "true" ]; then
+      true "INFO: whonix_build_script_verifiable is not set to true, skipping maybe_run $1, ok."
       return 0
    fi
 
@@ -209,10 +209,10 @@ fi
 
 echo "INFO: Cleaning up..."
 
-if [ "$whonix_build_script_skip_verifiable" = "1" ]; then
-   true "INFO: whonix_build_script_skip_verifiable is set to 1, skipping creation of todo_file $todo_file, ok."
+if [ ! "$whonix_build_script_verifiable" = "true" ]; then
+   true "INFO: whonix_build_script_skip_verifiable is not set to true, skipping creation of todo_file $todo_file, ok."
 else
-   true "INFO: whonix_build_script_skip_verifiable is not set to 1, creating todo_file $todo_file..."
+   true "INFO: whonix_build_script_verifiable is set to true, creating todo_file $todo_file..."
    mkdir --parents "/var/lib/whonix-initializer/status-files/"
    touch "$todo_file"
    true "INFO: Created todo_file $todo_file."
