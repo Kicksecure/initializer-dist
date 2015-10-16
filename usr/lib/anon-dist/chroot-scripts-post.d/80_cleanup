@@ -376,6 +376,9 @@ fi
 ## Not using maybe_rm, this should always be deleted for security reasons.
 rm --force /var/lib/urandom/random-seed
 
+rm --force /var/lib/systemd/random-seed
+rm --force /var/lib/random-seed
+
 ## non-deterministic [16]
 ## /etc/blkid.tab
 ## Although man blkid says /etc/blkid.tab is a cache file (and therefore should
