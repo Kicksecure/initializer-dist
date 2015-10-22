@@ -1,3 +1,36 @@
+commit 8b150409c464427c89aa9d4e261b80f5fc2fa5d1
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Fri Oct 16 21:40:52 2015 +0000
+
+    - opt-out verifiable builds by default
+    - refactoring, renamed variable whonix_build_script_skip_verifiable to whonix_build_script_verifiable
+
+commit 287d745c72a09733367e5d4dacbc5c5e07db9946
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Fri Oct 16 16:54:58 2015 +0000
+
+    delete /var/lib/systemd/random-seed and /var/lib/random-seed
+
+commit e6debabc76057a7ba36f82be71c5a2e9262327cd
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Sep 21 23:55:41 2015 +0000
+
+    Make sure /etc/systemd/system/sysinit.target.wants/systemd-timesyncd.service gets really deleted even if timedatectl does not work.
+
+commit 4aa945de77275388df89ee03d514e18030893315
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Sep 21 18:33:19 2015 +0200
+
+    Run 'timedatectl set-ntp false >/dev/null 2>&1 || true' during cleanup chroot script.
+    Deletes /etc/system/sysinit.target.wants/systemd-timesyncd.service.
+    Otherwise timedatectl still thinks systemd-timesyncd is enabled.
+
+commit 5e2620cba083aa7b150c743702df2dfca0cbe60a
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Tue Aug 25 14:08:34 2015 +0000
+
+    bumped changelog version
+
 commit 7909a4d555507c2ff5331af5337a9445f2583727
 Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Mon Aug 24 17:47:33 2015 +0000
