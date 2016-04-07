@@ -1,3 +1,25 @@
+commit d087c4490a63928b922869aa3ede852cd2994a3d
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu Apr 7 19:06:56 2016 +0000
+
+    added dependencies debsums and damngpl for new chroot scripts that were merged
+    
+    https://phabricator.whonix.org/T461
+
+commit 151eec132b99f64d50fea0e8d5b909c68d24c4ad
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu Apr 7 19:02:54 2016 +0000
+
+    merged chroot scripts from anon-shared-build-sanity-checks and anon-shared-build-remember-sources
+    
+    https://phabricator.whonix.org/T461
+
+commit f23e1de5be51849e6f4200636c39f78e99b42fde
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu Oct 22 23:12:43 2015 +0000
+
+    bumped changelog version
+
 commit 8b150409c464427c89aa9d4e261b80f5fc2fa5d1
 Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Fri Oct 16 21:40:52 2015 +0000
