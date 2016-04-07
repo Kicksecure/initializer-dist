@@ -14,7 +14,7 @@ Standards-Version: 3.9.6
 
 Package: whonix-initializer
 Architecture: all
-Depends: psmisc, ${misc:Depends}
+Depends: psmisc, debsums, damngpl, ${misc:Depends}
 Description: Implements Whonix's Verifiable Builds feature and initializes Whonix
  Contains a chroot-scripts-post.d script, that cleans up temporary files, logs,
  and removed non-deterministic files using existing Debian prerm and postrm
