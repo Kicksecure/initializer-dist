@@ -14,6 +14,7 @@ Standards-Version: 3.9.6
 
 Package: whonix-initializer
 Architecture: all
+Replaces: anon-shared-build-remember-sources, anon-shared-build-sanity-checks
 Depends: psmisc, debsums, damngpl, ${misc:Depends}
 Description: Implements Whonix's Verifiable Builds feature and initializes Whonix
  Contains a chroot-scripts-post.d script, that cleans up temporary files, logs,
