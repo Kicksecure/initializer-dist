@@ -1,3 +1,15 @@
+commit c22f2f1df13d17836b9edd053b8c8ae5b4c3236a
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Wed Apr 27 23:44:11 2016 +0000
+
+    Replaces: anon-shared-build-remember-sources, anon-shared-build-sanity-checks
+
+commit 5e9c9ff7d23012132f5cfd87586c0967ca715b46
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu Apr 7 22:54:56 2016 +0000
+
+    bumped changelog version
+
 commit d087c4490a63928b922869aa3ede852cd2994a3d
 Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Thu Apr 7 19:06:56 2016 +0000
