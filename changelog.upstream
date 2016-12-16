@@ -1,3 +1,21 @@
+commit be3f1be0831c3d1a9e7e36864d212578e78bbf32
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Wed Dec 14 20:45:01 2016 +0000
+
+    display-manager.service -> graphical.target
+
+commit bf6f3f195d457db61cf65dfaaf0c34ad59e6de84
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Wed Dec 14 19:02:29 2016 +0000
+
+    remove Before=control-port-filter-python.service to prevent systemd warning
+
+commit 0783fe34f7572ddda48b086fbff6a5cb510a67a0
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sat Dec 10 02:40:13 2016 +0000
+
+    bumped changelog version
+
 commit deba20d4fa985c29e5957502229d77e7d47782f9
 Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Wed Dec 7 22:50:04 2016 +0000
