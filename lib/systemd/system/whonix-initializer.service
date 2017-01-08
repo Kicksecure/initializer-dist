@@ -33,7 +33,7 @@ ExecStart=/usr/lib/first_run_initializer_gui
 TimeoutSec=0
 RemainAfterExit=yes
 #StandardInput=tty
-StandardOutput=tty
+StandardOutput=journal+console
 
 [Install]
 WantedBy=multi-user.target
