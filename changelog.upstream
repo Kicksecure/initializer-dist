@@ -1,3 +1,21 @@
+commit 60da62400db730ac0fdcb73d31fe96d9928d9ab7
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sun Jan 8 05:39:25 2017 +0000
+
+    StandardOutput=journal+console
+
+commit 9c2992d93acf53955a0529d3451d93a00c09134a
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sat Jan 7 21:24:35 2017 +0100
+
+    add more non-interactivity options just in case
+
+commit ef22a4d6e0524cce8684aae43aa3d3b68ae21569
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Fri Dec 16 16:19:10 2016 +0000
+
+    bumped changelog version
+
 commit be3f1be0831c3d1a9e7e36864d212578e78bbf32
 Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Wed Dec 14 20:45:01 2016 +0000
