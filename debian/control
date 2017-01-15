@@ -10,7 +10,7 @@ Build-Depends: debhelper (>= 9), faketime, genmkfile, dh-systemd
 Homepage: https://www.whonix.org/wiki/Verifiable_Builds
 Vcs-Browser: https://github.com/Whonix/whonix-initializer
 Vcs-Git: https://github.com/Whonix/whonix-initializer.git
-Standards-Version: 3.9.6
+Standards-Version: 3.9.8
 
 Package: whonix-initializer
 Architecture: all
