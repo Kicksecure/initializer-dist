@@ -4,6 +4,7 @@
 
 [Unit]
 Description=Whonix First Run Initializer (text mode)
+Documentation=https://github.com/Whonix/whonix-initializer
 After=livesys.service plymouth-quit-wait.service
 After=systemd-vconsole-setup.service
 Before=graphical.target getty@tty1.service getty@ttyUSB0.service
