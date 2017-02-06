@@ -17,6 +17,7 @@ Before=tor-controlport-filter.service
 
 ## Better look and feel.
 Before=tor.service
+Before=tor@default.service
 After=swap-file-creator.service
 
 #Conflicts=plymouth-quit-wait.service
