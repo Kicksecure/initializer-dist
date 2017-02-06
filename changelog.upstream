@@ -1,3 +1,15 @@
+commit f0758ebb3114f01f094d448ae731558df5603eb9
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Feb 6 17:28:01 2017 +0000
+
+    Before=tor@default.service
+
+commit 7e14673f070103addaedccbbfa505fb6381fc4bc
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sun Jan 15 15:38:56 2017 +0000
+
+    bumped changelog version
+
 commit cf763eec96f60d98eea17493e37a8f02a86ddd27
 Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Sun Jan 15 13:29:21 2017 +0000
