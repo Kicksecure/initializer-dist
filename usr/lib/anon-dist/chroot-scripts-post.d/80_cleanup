@@ -118,7 +118,7 @@ fi
    if [ ! "$whonix_build_script_verifiable" = "true" ]; then
       true "INFO: whonix_build_script_verifiable is set not set to true, skipping rm $1, ok."
    else
-      rm --force ${1+"$@"}
+      rm --force "$@"
    fi
 }
 
