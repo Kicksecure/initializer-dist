@@ -1,3 +1,35 @@
+commit ada3709ea0e022f8c2af4f687ba6b9b3aa75d957
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Tue Feb 14 19:27:47 2017 +0000
+
+    replace $apt_timeout_opts $apt_verify_opts $apt_misc_opts with "${APTGETOPT[@]}"
+
+commit 3ce6d2d3ea2bed6faeae4beed744b4e3b4ee4e68
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Tue Feb 14 17:30:31 2017 +0000
+
+    "$@"
+
+commit 6a9b6414ee2e6b4934ba8ff699a004a7a1597b66
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Fri Feb 10 15:47:56 2017 +0000
+
+    remove faketime from Build-Depends:
+    
+    since no longer used for reproducible builds
+
+commit 9d50fc2b88a5392fe948e59b8b0afd248f376669
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Fri Feb 10 15:35:34 2017 +0000
+
+    remove debian/gain-root-command workaround
+
+commit c88f930eab8b3187f454b63b59812299a53782a3
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Feb 6 18:01:44 2017 +0000
+
+    bumped changelog version
+
 commit f0758ebb3114f01f094d448ae731558df5603eb9
 Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Mon Feb 6 17:28:01 2017 +0000
