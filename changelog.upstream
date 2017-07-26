@@ -1,3 +1,15 @@
+commit afb21e8082af6e2d2622aba258788a5b6800adab
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu Mar 30 03:15:09 2017 +0200
+
+    control-port-filter-python -> onion-grater
+
+commit 1d137b4de524ede55d638abf6f95aa196a8729fd
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Fri Feb 17 14:16:56 2017 +0000
+
+    bumped changelog version
+
 commit ada3709ea0e022f8c2af4f687ba6b9b3aa75d957
 Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Tue Feb 14 19:27:47 2017 +0000
