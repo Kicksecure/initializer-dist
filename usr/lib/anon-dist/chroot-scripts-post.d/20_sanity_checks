@@ -66,7 +66,7 @@ time sudo --non-interactive -u root echo "This is a test echo."
 
 true "Check re-installing tzdata. Should run non-interactively."
 apt-get \
-   "${APTGETOPT[@]}" \
+   ${APTGETOPT[@]} \
    $apt_sourcelist_empty \
    $apt_sourceparts \
    --yes \

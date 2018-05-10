@@ -87,7 +87,7 @@ fi
    else
       true "INFO: Downloading $package..."
       local apt_get_download_exit_code="0"
-      apt-get "${APTGETOPT[@]}" $apt_sourcelist_empty $apt_sourceparts download "$package" || { apt_get_download_exit_code="$?" ; true; };
+      apt-get ${APTGETOPT[@]} $apt_sourcelist_empty $apt_sourceparts download "$package" || { apt_get_download_exit_code="$?" ; true; };
       if [ "$apt_get_download_exit_code" = "0" ]; then
          downloaded[$package]="1"
       else
