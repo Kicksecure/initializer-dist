@@ -1,3 +1,15 @@
+commit 745ab5ac967a1b10a723eba4704f100bd64c3b10
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu May 10 12:12:49 2018 +0000
+
+    fix apt-cacher-ng / fix quotes handling for apt-get use
+
+commit bdf16222b40b3571eed5c0f41038052b120004db
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu Feb 1 15:34:53 2018 +0000
+
+    bumped changelog version
+
 commit 1b3fb237427913ca76766f15befa23b7c12a1676
 Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Mon Jan 29 15:50:57 2018 +0000
