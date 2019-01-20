@@ -1,3 +1,17 @@
+commit 6705fa45965c20612ed40276fc961deb0e40890e
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sun Jan 20 07:22:39 2019 +0000
+
+    code simplification
+    
+    https://phabricator.whonix.org/T721
+
+commit c20f2df86cc868470ad815a936c4dbaf68b31201
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Aug 27 17:04:30 2018 +0000
+
+    bumped changelog version
+
 commit 94813c4d63b077e3965ee0bc639e371fcd8738dc
 Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Tue Aug 21 05:18:55 2018 +0800
