@@ -415,6 +415,9 @@ rm -r /home/user/.tb/gpgtmpdir || true
 ## non-deterministic [22]
 maybe_rm /boot/grub/device.map
 
+## Leftover from build process using mmdebstrap.
+rm --force /etc/apt/apt.conf.d/99mmdebstrap
+
 ## Truncate all log files, keeping user groups and permissions.
 find /var/log -type f -exec cp /dev/null {} \;
 
