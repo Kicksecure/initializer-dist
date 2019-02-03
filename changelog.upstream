@@ -1,3 +1,17 @@
+commit 099863d7b4f4634cedde1a0ec4afb5820a771610
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sun Feb 3 06:37:47 2019 -0500
+
+    rm --force /etc/apt/apt.conf.d/99mmdebstrap
+    
+    Leftover from build process using mmdebstrap.
+
+commit bc4692127e80101500aec3b0fa72521c8bf7c500
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sun Jan 20 07:23:16 2019 +0000
+
+    bumped changelog version
+
 commit 6705fa45965c20612ed40276fc961deb0e40890e
 Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Sun Jan 20 07:22:39 2019 +0000
