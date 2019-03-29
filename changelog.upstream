@@ -1,3 +1,15 @@
+commit 88994d5dd7219a5b8c32ec90acf1cc394f5f8180
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Fri Mar 29 09:03:21 2019 +0000
+
+    https://www.whonix.org/wiki/Dev/Licensing
+
+commit 13b0e84e7c360901630bffccfe7a6e2d70940a10
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Tue Mar 12 11:47:55 2019 +0000
+
+    bumped changelog version
+
 commit 6bca31945b9247a0e5fb69507b588c8c07cf089d
 Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Fri Mar 1 14:32:44 2019 +0000
