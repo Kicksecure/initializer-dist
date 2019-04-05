@@ -6,3 +6,6 @@ whonix-initializer: uses-dpkg-database-directly usr/lib/anon-dist/chroot-scripts
 
 ## Ok for chroot script.
 whonix-initializer: uses-dpkg-database-directly usr/lib/anon-dist/chroot-scripts-post.d/80_cleanup
+
+## False positive.
+whonix-initializer: uses-dpkg-database-directly usr/lib/first_run_initializer
