@@ -74,9 +74,6 @@ License: GPL-3+-with-additional-terms-1
 
 Files: lib/systemd/system/whonix-initializer.service
 Copyright: (C) 2009-2013  Red Hat, Inc.
-Comment: https://git.fedorahosted.org/cgit/initial-setup.git/tree/COPYING
- https://git.fedorahosted.org/cgit/initial-setup.git/tree/Makefile
- https://git.fedorahosted.org/cgit/initial-setup.git/tree/systemd/initial-setup-text.service
 License: GPL-2
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
