@@ -1,3 +1,15 @@
+commit b23e69123bc4ba2724fab462b3bd9c27e18f8435
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sat Apr 6 15:39:49 2019 +0000
+
+    need to disable test
+
+commit 6930f134feb78f1f07c1669a2bac3fcf5561fd20
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sat Apr 6 12:23:58 2019 +0000
+
+    bumped changelog version
+
 commit 795a421b56d1d1d7bb000d36660315ee5d2540e7
 Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Fri Apr 5 13:03:32 2019 -0400
