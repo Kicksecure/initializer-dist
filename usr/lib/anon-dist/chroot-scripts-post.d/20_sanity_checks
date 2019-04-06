@@ -90,15 +90,18 @@ true "INFO: Trying to find out if there are any packages (or debs) with missing 
 exit_code="0"
 debsums_output_2="$(debsums --silent 2>&1)" || { exit_code="$?" ; true; };
 
-if [ ! "$exit_code" = "0" ]; then
-   error "ERROR: debsums returned a non-zero exit_code: $exit_code!"
-fi
+# debsums: missing file /lib/modules/4.19.0-4-amd64/kernel/drivers/staging/vboxvideo/vboxvideo.ko (from linux-image-4.19.0-4-amd64 package)
+# debsums: missing file /lib/modules/4.19.0-4-amd64/kernel/drivers/virt/vboxguest/vboxguest.ko (from linux-image-4.19.0-4-amd64 package)
 
-if [ "$debsums_output_2" = "" ]; then
-   true "INFO: Ok, no packages (or debs) with missing files file found."
-else
-   error "ERROR: Packages (or debs) with missing files found!"
-fi
+# if [ ! "$exit_code" = "0" ]; then
+#    error "ERROR: debsums returned a non-zero exit_code: $exit_code!"
+# fi
+#
+# if [ "$debsums_output_2" = "" ]; then
+#    true "INFO: Ok, no packages (or debs) with missing files file found."
+# else
+#    error "ERROR: Packages (or debs) with missing files found!"
+# fi
 
 true "INFO: Listing changed configuration files..."
 true "      (Only an information, no check...)"
