@@ -439,6 +439,9 @@ sync
 
 ## Delete bash history.
 rm "/home/$user_name/.bash_history" || true
+rm "/home/$user_name/.Xauthority" || true
+rm "/root/.bash_history" || true
+rm "/root/.Xauthority" || true
 history -c || true
 
 sync
