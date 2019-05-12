@@ -1,3 +1,15 @@
+commit 591c831a516614c7a911e1d3796066d00749ab14
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sun May 12 05:44:07 2019 -0400
+
+    import from https://github.com/onions-knight/whonix-stuff/blob/master/2900_configure_desktop_sketch
+
+commit 55ccbf90b2e9b9411c686e89776ecf49dde6e06b
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Fri May 3 11:44:40 2019 +0000
+
+    bumped changelog version
+
 commit 18d82b5aa4d4788f045ecfa1f141f91409174910
 Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Fri May 3 10:56:59 2019 +0000
