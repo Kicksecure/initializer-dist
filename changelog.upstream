@@ -1,3 +1,17 @@
+commit 63d86524d6f519646e04697d1f7ad63bbfc868f1
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Jul 15 12:44:19 2019 -0400
+
+    change folder to /var/lib/whonix-initial-packages to avoid future issues
+    
+    with Qubes bind dirs
+
+commit 3e878a54cb922b8a7e1c446d1cf4edd3a33652b6
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sat Jun 8 11:42:25 2019 +0000
+
+    bumped changelog version
+
 commit 5eadbc1d8037ec5ccdbbd7cfdd9a42a1133c6344
 Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Sat Jun 8 00:05:38 2019 -0400
