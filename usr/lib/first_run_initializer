@@ -41,7 +41,7 @@ fi
 [ -n "$APT_LISTCHANGES_FRONTEND" ] || APT_LISTCHANGES_FRONTEND="text"
 export DEBIAN_FRONTEND DEBIAN_PRIORITY DEBCONF_NOWARNINGS APT_LISTCHANGES_FRONTEND
 
-## {{{ /var/lib/whonix/initial-packages
+## {{{ /var/lib/whonix-initial-packages
 
 ## Using a simpler method to install initial packages.
 ## Leaving dependency resolution to dpkg.
@@ -58,12 +58,12 @@ debugging
 
 true "\
 $output_identifier
-INFO: Running dpkg --install /var/lib/whonix/initial-packages/* for the first time...
+INFO: Running dpkg --install /var/lib/whonix-initial-packages/* for the first time...
       The errors:
       - update-xmlcatalog: error: root catalog /etc/xml/catalog not found
       - update-xmlcatalog: error: package catalog /etc/xml/docbook-xml.xml not found
       are expected and can be ignored. When running dpkg for the second time, they will be gone."
-dpkg --install "/var/lib/whonix/initial-packages/"* || true
+dpkg --install "/var/lib/whonix-initial-packages/"* || true
 true "$output_identifier INFO: Done running dpkg for the first time."
 
 debugging
@@ -71,9 +71,9 @@ debugging
 ## This may not be necessary.
 ## Re-running the same command, so we can see in the log, if it runs without
 ## any warnings the second time.
-true "$output_identifier INFO: Running dpkg --install /var/lib/whonix/initial-packages/* for the \
+true "$output_identifier INFO: Running dpkg --install /var/lib/whonix-initial-packages/* for the \
 second and final time..."
-dpkg --install "/var/lib/whonix/initial-packages/"*
+dpkg --install "/var/lib/whonix-initial-packages/"*
 true "$output_identifier INFO: Done running dpkg for the second and final time."
 
 ## }}}

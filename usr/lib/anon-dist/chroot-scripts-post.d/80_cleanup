@@ -217,9 +217,9 @@ else
    true "INFO: Created todo_file $todo_file."
 fi
 
-mkdir --parents "/var/lib/whonix/initial-packages"
+mkdir --parents "/var/lib/whonix-initial-packages"
 ## This is important for the download_package function.
-cd "/var/lib/whonix/initial-packages"
+cd "/var/lib/whonix-initial-packages"
 
 ## non-deterministic [1]
 ## /var/cache/fontconfig
