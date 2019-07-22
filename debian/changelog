@@ -1,3 +1,9 @@
+whonix-initializer (3:4.6-1) unstable; urgency=medium
+
+  * New upstream version (local package).
+
+ -- Patrick Schleizer <adrelanos@riseup.net>  Mon, 22 Jul 2019 01:20:39 +0000
+
 whonix-initializer (3:4.5-1) unstable; urgency=medium
 
   * New upstream version (local package).
