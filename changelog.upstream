@@ -1,3 +1,23 @@
+commit 852327a192a27e19c75026172c1cf6699a66cedc
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Fri Dec 6 09:30:08 2019 -0500
+
+    readme
+
+commit 5d2e0967ff02b69f905093b83fe72164bc4031c3
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Tue Dec 3 06:33:49 2019 -0500
+
+    document random seed deletion during build process
+    
+    https://systemd.io/RANDOM_SEEDS.html
+
+commit 9f2f0775a90b4e08531eb082b61051f727d5d860
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu Aug 1 12:13:50 2019 +0000
+
+    bumped changelog version
+
 commit c07c9ca0ba2ca538bb6da10fb67922e643490914
 Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Thu Aug 1 11:13:48 2019 +0000
