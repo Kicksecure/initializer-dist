@@ -5,7 +5,7 @@ Source: whonix-initializer
 Section: misc
 Priority: optional
 Maintainer: Patrick Schleizer <adrelanos@riseup.net>
-Build-Depends: debhelper (>= 12), genmkfile
+Build-Depends: debhelper (>= 12)
 Homepage: https://www.whonix.org/wiki/Verifiable_Builds
 Vcs-Browser: https://github.com/Whonix/whonix-initializer
 Vcs-Git: https://github.com/Whonix/whonix-initializer.git
