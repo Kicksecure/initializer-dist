@@ -1,3 +1,21 @@
+commit c86511832fce9a8ba37e4c6bf7a0e8c69ee2234a
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu Apr 2 18:21:48 2020 -0400
+
+    remove verifiable builds leftovers
+
+commit 4e760491210e7b1ef00624684d19824d098f5f51
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu Apr 2 18:20:15 2020 -0400
+
+    update debian/whonix-initializer.install
+
+commit f27ac94ee6f784d7e8b89a25cab43a1f9dc22a55
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu Apr 2 18:16:09 2020 -0400
+
+    bumped changelog version
+
 commit 3ee193b4efb21a0e22ee27269f4620f57af5d241
 Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Thu Apr 2 18:13:27 2020 -0400
