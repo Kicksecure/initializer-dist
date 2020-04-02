@@ -3,6 +3,8 @@
 ## Copyright (C) 2012 - 2020 ENCRYPTED SUPPORT LP <adrelanos@riseup.net>
 ## See the file COPYING for copying conditions.
 
+## TODO: has overlap with cleanup chroot script which should be removed
+
 set -x
 set -e
 set -o pipefail
