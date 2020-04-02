@@ -4,30 +4,8 @@
 ## See the file COPYING for copying conditions.
 
 set -x
+set -e
 set -o pipefail
-
-error_handler() {
-   true "\
-###########################################################
-## chroot script: ERROR detected. Please report this bug! #
-###########################################################"
-
-   exit 1
-}
-
-## {{ Set up error handler.
-if [ "$(type -t errorhandlergeneral)" = "function" ]; then
-   ## Function errorhandlergeneral exists (declared in
-   ## help-steps/pre). Prefer to use the more feature rich version of the error
-   ## handler.
-   trap "errorhandlergeneral" ERR
-else
-   ## Function errorhandlergeneral does not exist. Script
-   ## runs standalone outside the build script. Fall back to a simpler error
-   ## handler.
-   trap "error_handler" ERR
-fi
-## }}
 
 own_filename="$(basename "$BASH_SOURCE")"
 for skip_script in $SKIP_SCRIPTS; do
@@ -49,6 +27,3 @@ damngpl --dget /var/lib/dpkg/status > /var/lib/anon-dist/gpl/damngpl_dget
 
 ## Outputs snapshot.debian.net deb-src lines
 damngpl --snapshot /var/lib/dpkg/status > /var/lib/anon-dist/gpl/damngpl_snapshot
-
-## Explicitly "exit 0", so eventually trapped errors can be ignored.
-exit 0

@@ -4,30 +4,8 @@
 ## See the file COPYING for copying conditions.
 
 set -x
+set -e
 set -o pipefail
-
-error_handler() {
-   true "\
-###########################################################
-## chroot script: ERROR detected. Please report this bug! #
-###########################################################"
-
-   exit 1
-}
-
-## {{ Set up error handler.
-if [ "$(type -t errorhandlergeneral)" = "function" ]; then
-   ## Function errorhandlergeneral exists (declared in
-   ## help-steps/pre). Prefer to use the more feature rich version of the error
-   ## handler.
-   trap "errorhandlergeneral" ERR
-else
-   ## Function errorhandlergeneral does not exist. Script
-   ## runs standalone outside the build script. Fall back to a simpler error
-   ## handler.
-   trap "error_handler" ERR
-fi
-## }}
 
 own_filename="$(basename "$BASH_SOURCE")"
 for skip_script in $SKIP_SCRIPTS; do
@@ -38,9 +16,6 @@ for skip_script in $SKIP_SCRIPTS; do
 done
 unset skip_script
 
-sync
-
-true 'INFO: Running "dpkg --audit" to check if the system is functional...'
 ## dpkg --audit does not exit with a non-zero exit code if something is wrong.
 ## dpkg --audit does not return anything, if everything is fine.
 ## Therefore we see if dpkg has to say something, and if yes, the system is
@@ -50,36 +25,13 @@ if [ ! "$dpkg_audit_output" = "" ]; then
    error "dpkg_audit_output not empty!"
 fi
 
-true 'INFO: Running "dpkg --configure -a" to check if the system is functional. Can take a while...'
 dpkg --configure -a
 
-sync
-
-true "INFO: Checking if sysctcl -p runs without an error..."
 sysctl -p
 
-## No longer working due to root account locking.
-## sudo: account validation failure, is your account locked?
-## https://forums.whonix.org/t/restrict-root-access/7658/51
-# true 'INFO: 1/2 Benchmarking "sudo -u root echo "This is a test echo."" using "time"...'
-# time sudo --non-interactive -u root echo "This is a test echo."
-# true 'INFO: 2/2 Benchmarking "sudo -u root echo "This is a test echo."" using "time"...'
-# time sudo --non-interactive -u root echo "This is a test echo."
-
-true "Check non-interactively reconfiguring tzdata. Should run non-interactively."
 DEBIAN_FRONTEND=noninteractive dpkg-reconfigure tzdata
 
-true "INFO: Checking if debsums is installed..."
-command -v debsums >/dev/null
-
-true "INFO: Trying to find out if there are packages (or debs) which do not have an MD5 sums file..."
-
-exit_code="0"
-debsums_output_1="$(debsums --list-missing 2>&1)" || { exit_code="$?" ; true; };
-
-if [ ! "$exit_code" = "0" ]; then
-   error "ERROR: debsums returned a non-zero exit_code: $exit_code!"
-fi
+debsums_output_1="$(debsums --list-missing 2>&1)"
 
 if [ "$debsums_output_1" = "" ]; then
    true "INFO: Ok, no packages (or debs) with missing MD5 sums file found."
@@ -87,10 +39,7 @@ else
    error "ERROR: Packages (or debs) with missing MD5 sums file found!"
 fi
 
-true "INFO: Trying to find out if there are any packages (or debs) with missing files..."
-
-exit_code="0"
-debsums_output_2="$(debsums --silent 2>&1)" || { exit_code="$?" ; true; };
+debsums --silent || true
 
 # debsums: missing file /lib/modules/4.19.0-4-amd64/kernel/drivers/staging/vboxvideo/vboxvideo.ko (from linux-image-4.19.0-4-amd64 package)
 # debsums: missing file /lib/modules/4.19.0-4-amd64/kernel/drivers/virt/vboxguest/vboxguest.ko (from linux-image-4.19.0-4-amd64 package)
@@ -111,10 +60,6 @@ true "      (Has to be reviewed manually by the builder.)"
 true "      (A differencing /etc/resolv.conf.anondist is expected when building \
 Virtual Machine images, because the /etc/resolv.conf from the host has been mounted inside the image.)"
 
-exit_code="0"
-debsums_output_3="$(debsums --config --silent 2>&1)" || { exit_code="$?" ; true; };
+debsums --config --silent 2>&1 || true
 
 true "INFO: Listed changed configuration files."
-
-## Explicitly "exit 0", so eventually trapped errors can be ignored.
-exit 0
