@@ -1,3 +1,27 @@
+commit 3ee193b4efb21a0e22ee27269f4620f57af5d241
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu Apr 2 18:13:27 2020 -0400
+
+    readme
+
+commit 157bc2e14d500494f272a69f0e019670f453bff8
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu Apr 2 17:21:45 2020 -0400
+
+    description
+
+commit 8104a5c2264a4f7fb39ae258bcc0128621ab16a6
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu Apr 2 17:20:09 2020 -0400
+
+    remove no longer in use code for verifiable builds
+
+commit 7d5a2d85ddb7a4c652ec6dd078b0f55ddf24ef93
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu Apr 2 16:21:39 2020 -0400
+
+    bumped changelog version
+
 commit 9a78b1b7301f455711dc4dc2bd2bad783dcbf518
 Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Thu Apr 2 16:14:51 2020 -0400
