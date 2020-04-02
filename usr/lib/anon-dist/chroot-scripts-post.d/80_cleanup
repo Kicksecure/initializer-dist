@@ -206,7 +206,7 @@ fi
    shopt -u nullglob dotglob
 }
 
-echo "INFO: Cleaning up..."
+true "INFO: Cleaning up..."
 
 if [ ! "$whonix_build_script_verifiable" = "true" ]; then
    true "INFO: whonix_build_script_skip_verifiable is not set to true, skipping creation of todo_file $todo_file, ok."
