@@ -1,21 +1,14 @@
-# Implements Whonix's Verifiable Builds feature and initializes Whonix #
+# Initializes Linux distributions, Release Upgrades and Legacy #
 
 Contains a chroot-scripts-post.d script, that cleans up temporary files, logs.
 
-Deletes random seeds.  Since these should not be included in a redistributed
+Deletes random seeds. Since these should not be included in a redistributed
 image. Also sometimes called 'golden' image.
 
 - /var/lib/urandom/random-seed
 - /var/lib/systemd/random-seed
 - /var/lib/random-seed
 - See also: https://systemd.io/RANDOM_SEEDS.html
-
-Removes non-deterministic files using existing Debian prerm and postrm
-maintainer scripts. This helps auditors verifying binary builds of Whonix to
-check for backdoors and integrity.
-
-On first boot, all packages that were previously deconfigured, are reinstalled
-to restore full functionality of the system.
 ## How to install `whonix-initializer` using apt-get ##
 
 1\. Download [Whonix's Signing Key]().
