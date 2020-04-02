@@ -44,19 +44,6 @@ todo_file="/var/lib/whonix-initializer/status-files/first_run_initializer.todo"
 declare -A -g downloaded
 
 download_package() {
-   ## {{ Set up error handler.
-if [ "$(type -t errorhandlergeneral)" = "function" ]; then
-   ## Function errorhandlergeneral exists (declared in
-   ## help-steps/pre). Prefer to use the more feature rich version of the error
-   ## handler.
-   trap "errorhandlergeneral" ERR
-else
-   ## Function errorhandlergeneral does not exist. Script
-   ## runs standalone outside the build script. Fall back to a simpler error
-   ## handler.
-   trap "error_handler" ERR
-fi
-## }}
    local package="$1"
    if [ "${downloaded[$package]}" = "1" ]; then
       true "INFO: Already downloaded $package."
@@ -78,20 +65,6 @@ fi
 }
 
 maybe_rm() {
-   ## {{ Set up error handler.
-if [ "$(type -t errorhandlergeneral)" = "function" ]; then
-   ## Function errorhandlergeneral exists (declared in
-   ## help-steps/pre). Prefer to use the more feature rich version of the error
-   ## handler.
-   trap "errorhandlergeneral" ERR
-else
-   ## Function errorhandlergeneral does not exist. Script
-   ## runs standalone outside the build script. Fall back to a simpler error
-   ## handler.
-   trap "error_handler" ERR
-fi
-## }}
-
    if [ ! "$whonix_build_script_verifiable" = "true" ]; then
       true "INFO: whonix_build_script_verifiable is set not set to true, skipping rm $1, ok."
    else
@@ -100,20 +73,6 @@ fi
 }
 
 maybe_run() {
-   ## {{ Set up error handler.
-if [ "$(type -t errorhandlergeneral)" = "function" ]; then
-   ## Function errorhandlergeneral exists (declared in
-   ## help-steps/pre). Prefer to use the more feature rich version of the error
-   ## handler.
-   trap "errorhandlergeneral" ERR
-else
-   ## Function errorhandlergeneral does not exist. Script
-   ## runs standalone outside the build script. Fall back to a simpler error
-   ## handler.
-   trap "error_handler" ERR
-fi
-## }}
-
    if [ ! "$whonix_build_script_verifiable" = "true" ]; then
       true "INFO: whonix_build_script_verifiable is not set to true, skipping maybe_run $1, ok."
       return 0
