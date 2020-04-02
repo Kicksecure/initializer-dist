@@ -1,3 +1,83 @@
+commit 9a78b1b7301f455711dc4dc2bd2bad783dcbf518
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu Apr 2 16:14:51 2020 -0400
+
+    readme
+
+commit 1ff90a24c89845cc396f05da18fc3a7499cb16ac
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu Apr 2 15:54:54 2020 -0400
+
+    description
+
+commit 3443ec4c41f202fbcb2645f0f87bf786f2300e1a
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu Apr 2 15:53:14 2020 -0400
+
+    comment
+
+commit cf4202eaae9960834d81a9e1c16037d6209f70b6
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu Apr 2 15:52:16 2020 -0400
+
+    code simplification
+    
+    move verifiable builds (currently not in use) to separate file
+    
+    update path
+
+commit f2b0b0c37996335480269cb6680c6d61f0f1a7a0
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu Apr 2 15:43:48 2020 -0400
+
+    code simplification
+
+commit 7166c8b6ece1bb4180cd1720d64835dca80a0a8b
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu Apr 2 15:40:54 2020 -0400
+
+    cleanup
+    
+    remove out commented code
+    
+    zerofree has a much better implementation in build-steps for a while now
+
+commit 3fa75bb8e88b278a0ca1956aeaac7e481e7c27b0
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu Apr 2 15:40:15 2020 -0400
+
+    code simplification
+
+commit 0e63bf6b8efe4f771c141f9752a9db1d2ae972a2
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu Apr 2 15:39:32 2020 -0400
+
+    output
+
+commit c18740add737a4da4598c39ac4ecb89f73fda9f4
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu Apr 2 15:37:48 2020 -0400
+
+    more useful output in xtrace
+
+commit caced957c67ee803481fd4f4457b797b66f39dc8
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu Apr 2 15:37:40 2020 -0400
+
+    code simplification
+
+commit 176b02fbcf6f0efabfb510f13dc716ceff01b6fa
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu Apr 2 14:41:31 2020 -0400
+
+    cleanup
+
+commit cd5f736db1947b70b2633bb56b727d0720d05d63
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu Apr 2 08:10:25 2020 -0400
+
+    bumped changelog version
+
 commit ead81bc93a319f39718a3276382edfe08efb29ea
 Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Thu Apr 2 07:23:04 2020 -0400
