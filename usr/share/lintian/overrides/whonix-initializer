@@ -2,7 +2,7 @@
 ## See the file COPYING for copying conditions.
 
 ## Read-only access is ok.
-whonix-initializer: uses-dpkg-database-directly usr/lib/anon-dist/chroot-scripts-post.d/75_sources
+whonix-initializer: uses-dpkg-database-directly usr/libexec/initializer-dist/chroot-scripts-post.d/75_sources
 
 ## Ok for chroot script.
-whonix-initializer: uses-dpkg-database-directly usr/lib/anon-dist/chroot-scripts-post.d/80_cleanup
+whonix-initializer: uses-dpkg-database-directly usr/libexec/initializer-dist/chroot-scripts-post.d/80_cleanup
