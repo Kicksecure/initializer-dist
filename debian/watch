@@ -2,5 +2,5 @@
 ## See the file COPYING for copying conditions.
 
 version=4
-opts=filenamemangle=s/.+\/v?(\d\S+)\.tar\.gz/whonix-initializer-$1\.tar\.gz/ \
-  https://github.com/Whonix/whonix-initializer/tags .*/v?(\d\S+)\.tar\.gz
+opts=filenamemangle=s/.+\/v?(\d\S+)\.tar\.gz/initializer-dist-$1\.tar\.gz/ \
+  https://github.com/Whonix/initializer-dist/tags .*/v?(\d\S+)\.tar\.gz
