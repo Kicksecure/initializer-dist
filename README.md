@@ -18,7 +18,7 @@ image. Also sometimes called 'golden' image.
 wget https://www.kicksecure.com/derivative.asc
 ```
 
-Users can [check Whonix Signing Key](https://www.kicksecure.com/wiki/Signing_Key) for better security.
+Users can [check the Signing Key](https://www.kicksecure.com/wiki/Signing_Key) for better security.
 
 2\. Add the APT Signing Key..
 
