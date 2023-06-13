@@ -2,7 +2,7 @@
 ## See the file COPYING for copying conditions.
 
 ## Read-only access is ok.
-initializer-dist: uses-dpkg-database-directly usr/libexec/initializer-dist/chroot-scripts-post.d/75_sources
+initializer-dist: uses-dpkg-database-directly [usr/libexec/initializer-dist/chroot-scripts-post.d/75_sources]
 
 ## Ok for chroot script.
-initializer-dist: uses-dpkg-database-directly usr/libexec/initializer-dist/chroot-scripts-post.d/80_cleanup
+initializer-dist: uses-dpkg-database-directly [usr/libexec/initializer-dist/chroot-scripts-post.d/80_cleanup]
