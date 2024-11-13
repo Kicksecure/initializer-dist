@@ -17,7 +17,7 @@ Architecture: all
 Provides: whonix-initializer, anon-shared-build-remember-sources, anon-shared-build-sanity-checks
 Replaces: whonix-initializer, anon-shared-build-remember-sources, anon-shared-build-sanity-checks
 Conflicts: whonix-initializer, anon-shared-build-remember-sources, anon-shared-build-sanity-checks
-Depends: psmisc, debsums, damngpl, ${misc:Depends}
+Depends: psmisc, debsums, damngpl, safe-rm, ${misc:Depends}
 Description: Initializes Linux distributions, Release Upgrades and Legacy
  Contains a chroot-scripts-post.d script, that cleans up temporary files, logs.
  .

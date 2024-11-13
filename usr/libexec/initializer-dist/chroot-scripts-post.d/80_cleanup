@@ -21,11 +21,11 @@ true "INFO: Cleaning up..."
 ## Kill dhclient3 to prevent rewrite of /var/lib/dhcp/*.
 killall dhclient3 || true
 ## There are .leases.
-rm /var/lib/dhcp/*.leases || true
+safe-rm /var/lib/dhcp/*.leases || true
 ## And there are .lease.
-rm /var/lib/dhcp/*.lease || true
+safe-rm /var/lib/dhcp/*.lease || true
 ## We are best of deleting the whole folder.
-rm -r /var/lib/dhcp/* || true
+safe-rm -r /var/lib/dhcp/* || true
 
 ## Cleanup.
 ## || true to support re-running the script.
@@ -38,25 +38,25 @@ apt-get --yes clean || true
 ## No longer deleting /var/lib/tor. We install but forbid to run software such as Tor we install.
 ## Therefore /var/lib/tor should be empty.
 ## Ensure to delete /var/lib/tor. It contains sensitive stuff like the Tor consensus and the Tor entry guards.
-## rm -r /var/lib/tor/* || true
+## safe-rm -r /var/lib/tor/* || true
 
 ## Delete logs and other stuff.
-rm -r /tmp/* || true
-rm /var/log/installer/* || true
-rm -r /var/cache/apt/* || true
-rm -r /var/lib/apt/lists/* || true
-rm -r /var/log/installer || true
-rm /var/lib/dpkg/*-old || true
-rm /var/cache/debconf/*-old || true
+safe-rm -r /tmp/* || true
+safe-rm /var/log/installer/* || true
+safe-rm -r /var/cache/apt/* || true
+safe-rm -r /var/lib/apt/lists/* || true
+safe-rm -r /var/log/installer || true
+safe-rm /var/lib/dpkg/*-old || true
+safe-rm /var/cache/debconf/*-old || true
 ## Erase rotated logs (usually wont appear unless you left your VM running for several days).
-rm /var/log/*.[0-9] || true
-rm /var/log/*.[0-9].gz || true
+safe-rm /var/log/*.[0-9] || true
+safe-rm /var/log/*.[0-9].gz || true
 
 ## Deletes /etc/system/sysinit.target.wants/systemd-timesyncd.service.
 ## Otherwise timedatectl still thinks systemd-timesyncd is enabled.
 timedatectl set-ntp false >/dev/null 2>&1 || true
 ## Make sure it gets really deleted even if timedatectl does not work.
-rm --force /etc/systemd/system/sysinit.target.wants/systemd-timesyncd.service
+safe-rm --force /etc/systemd/system/sysinit.target.wants/systemd-timesyncd.service
 
 ## non-deterministic [0]
 ## /var/lib/dpkg/available
@@ -80,29 +80,29 @@ fi
 ## /var/lib/urandom/random-seed
 ## This is no longer required for Debian Jessie?
 ## Should always be deleted for security reasons.
-rm --force /var/lib/urandom/random-seed
+safe-rm --force /var/lib/urandom/random-seed
 
-rm --force /var/lib/systemd/random-seed
-rm --force /var/lib/random-seed
+safe-rm --force /var/lib/systemd/random-seed
+safe-rm --force /var/lib/random-seed
 
 ## non-deterministic [21]
 ## Only required when using the anon-shared-build-inst-tb chroot-post.d script.
 ## No need to manually re-create it.
 ## Gets automatically re-created on next run of tb-updater.
 ## This is no longer required for Debian Jessie?
-rm -r /var/cache/tb-binary/.cache/tb/gpgtmpdir || true
+safe-rm -r /var/cache/tb-binary/.cache/tb/gpgtmpdir || true
 
 ## Leftover from build process using mmdebstrap.
-rm --force /etc/apt/apt.conf.d/99mmdebstrap
+safe-rm --force /etc/apt/apt.conf.d/99mmdebstrap
 
 ## Truncate all log files, keeping user groups and permissions.
 find /var/log -type f -exec cp /dev/null {} \;
 
 ## Delete bash history.
-rm "/home/$user_name/.bash_history" || true
-rm "/home/$user_name/.Xauthority" || true
-rm "/root/.bash_history" || true
-rm "/root/.Xauthority" || true
+safe-rm "/home/$user_name/.bash_history" || true
+safe-rm "/home/$user_name/.Xauthority" || true
+safe-rm "/root/.bash_history" || true
+safe-rm "/root/.Xauthority" || true
 history -c || true
 
 sync
