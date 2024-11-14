@@ -1,3 +1,27 @@
+commit d412070aaee207e760c993aeecc885ed15bb8503
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Nov 14 14:54:11 2024 -0500
+
+    comment
+
+commit f3e1463ded1faa335a1890c3991dd23c39585c7b
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Nov 14 14:53:06 2024 -0500
+
+    set user_name=user if not set
+
+commit 66e91e793e101928c32cd511a928ab5ef7a0182c
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Nov 13 12:41:14 2024 -0500
+
+    safe-rm
+
+commit eeae066f9b512caddf3547f9fdbf4b5e42ca267c
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Nov 11 20:16:31 2023 +0000
+
+    bumped changelog version
+
 commit e515545a273907908aa48fbc390a11a411fe56b1
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Sat Nov 11 13:41:29 2023 -0500
