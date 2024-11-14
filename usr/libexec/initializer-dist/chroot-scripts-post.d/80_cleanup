@@ -70,7 +70,7 @@ dpkg --clear-avail
 ## Recreate those and therefore hopefully come up with deterministic results.
 ##
 ## Only attempt to run `insserv` when it's installed. This ensures, that this
-## works on CI systems (Ubuntu) and in modified Whonix versions as well.
+## works on CI systems (Ubuntu) and in modified derivative versions as well.
 if [ -x /sbin/insserv ]; then
    /sbin/insserv --showall
    /sbin/insserv --verbose
