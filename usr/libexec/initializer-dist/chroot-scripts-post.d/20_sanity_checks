@@ -16,7 +16,6 @@ for skip_script in $SKIP_SCRIPTS; do
 done
 unset skip_script
 
-## dpkg --audit does not exit with a non-zero exit code if something is wrong.
 ## dpkg --audit does not return anything, if everything is fine.
 ## Therefore we see if dpkg has to say something, and if yes, the system is
 ## broken and we abort.
