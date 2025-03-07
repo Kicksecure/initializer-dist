@@ -1,0 +1,21 @@
+#!/bin/bash
+
+## Copyright (C) 2025 - 2025 ENCRYPTED SUPPORT LLC <adrelanos@whonix.org>
+## See the file COPYING for copying conditions.
+
+set -x
+set -e
+set -o pipefail
+
+source /usr/libexec/helper-scripts/package_installed_check.bsh
+
+## Enable autologin by default for user `user`.
+mkdir --parents -- /etc/lightdm/lightdm.conf.d
+echo '[Seat:*]
+autologin-user=user' | sponge -- /etc/lightdm/lightdm.conf.d/40_autologin.conf
+
+## Enable autologin by default for user `sysmaint` when booted in PERSISTENT
+## mode SYSMAINT.
+if pkg_installed user-sysmaint-split; then
+   echo 'sysmaint-autologin=y' | sponge -- /etc/user-sysmaint-split.conf
+fi
