@@ -7,15 +7,13 @@ set -x
 set -e
 set -o pipefail
 
+## This script creates the autologin configuration files for account 'user'.
+## This is done in a chroot post-install script rather than simply shipping
+## the autologin configuration in a package, because the user may enable or
+## disable autologin manually and we don't want the user's changes and
+## Kicksecure packages to conflict.
+
 source /usr/libexec/helper-scripts/package_installed_check.bsh
 
 ## Enable autologin by default for user `user`.
-mkdir --parents -- /etc/lightdm/lightdm.conf.d
-echo '[Seat:*]
-autologin-user=user' | sponge -- /etc/lightdm/lightdm.conf.d/40_autologin.conf
-
-## Enable autologin by default for user `sysmaint` when booted in PERSISTENT
-## mode SYSMAINT.
-if pkg_installed user-sysmaint-split; then
-   echo 'sysmaint-autologin=y' | sponge -- /etc/user-sysmaint-split.conf
-fi
+/usr/sbin/autologinchange -e user
