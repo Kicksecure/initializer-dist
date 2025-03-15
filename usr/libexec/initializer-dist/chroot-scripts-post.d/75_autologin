@@ -13,7 +13,5 @@ set -o pipefail
 ## disable autologin manually and we don't want the user's changes and
 ## Kicksecure packages to conflict.
 
-source /usr/libexec/helper-scripts/package_installed_check.bsh
-
 ## Enable autologin by default for user `user`.
 /usr/sbin/autologinchange -e user
