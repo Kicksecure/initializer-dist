@@ -1,3 +1,40 @@
+commit 09e6a627e0730d22769f0f77af80b22b330257ea
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Mar 15 06:46:14 2025 -0400
+
+    comment
+
+commit 37b9b0f68749e50c671d38d7936ed7d680f6492e
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Mar 15 06:45:43 2025 -0400
+
+    cleanup
+
+commit aa3e74a538f314c52862b0335d3bd454967b728c
+Merge: c5acab0 b6fe527
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Mar 15 06:44:29 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/autologin'
+
+commit b6fe527cf44a6adf1ef0cceb92cf4071d81138ce
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Wed Mar 12 19:06:05 2025 -0500
+
+    Document and simplify 75_autologin script
+
+commit ad8c2eefa5ce48ce15cf648d4fbd2acf98590bed
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Fri Mar 7 16:38:54 2025 -0600
+
+    Enable autologin for users 'user' and 'sysmaint'
+
+commit c5acab0bff6f05fca0eda428d2fd3e874db0da11
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Jan 23 16:21:34 2025 +0000
+
+    bumped changelog version
+
 commit 8778503fab741727eb731e2236ced0587ec93f38
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Thu Jan 23 11:10:33 2025 -0500
