@@ -13,5 +13,5 @@ set -o pipefail
 ## disable autologin manually and we don't want the user's changes and
 ## Kicksecure packages to conflict.
 
-## Enable autologin by default for user `user`.
+## Enable autologin by default for account `user`.
 /usr/sbin/autologinchange -e user
