@@ -1,3 +1,15 @@
+commit 283e7dc1241cf286644a2ed40f03751836cca582
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Mar 27 04:56:51 2025 -0400
+
+    create status file `/var/lib/kicksecure/status-files/kicksetup-setup-wizard-dist-frist-start-maybe` in 17.3.5.2 and above
+
+commit 195119fc48160aa0c9326a12731b1ca17404bfd6
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Mar 15 10:51:31 2025 +0000
+
+    bumped changelog version
+
 commit 09e6a627e0730d22769f0f77af80b22b330257ea
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Sat Mar 15 06:46:14 2025 -0400
