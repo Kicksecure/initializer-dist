@@ -1,0 +1,15 @@
+#!/bin/bash
+
+## Copyright (C) 2025 - 2025 ENCRYPTED SUPPORT LLC <adrelanos@whonix.org>
+## See the file COPYING for copying conditions.
+
+set -x
+set -e
+set -o pipefail
+
+## This is done in a chroot-script because there is no other reliable way to
+## enable this using Debian maintainer scripts for new non-Qubes images only.
+
+mkdir --parents /var/lib/kicksecure/status-files
+## Doing this since 17.3.5.2 and above.
+touch /var/lib/kicksecure/status-files/kicksetup-setup-wizard-dist-frist-start-maybe
