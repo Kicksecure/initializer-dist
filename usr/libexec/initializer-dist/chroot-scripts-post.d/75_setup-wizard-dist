@@ -12,4 +12,4 @@ set -o pipefail
 
 mkdir --parents /var/lib/kicksecure/status-files
 ## Doing this since 17.3.5.2 and above.
-touch /var/lib/kicksecure/status-files/kicksetup-setup-wizard-dist-frist-start-maybe
+touch /var/lib/kicksecure/status-files/kicksetup-setup-wizard-dist-first-start-maybe
