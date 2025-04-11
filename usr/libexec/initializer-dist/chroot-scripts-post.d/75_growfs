@@ -1,0 +1,13 @@
+#!/bin/bash
+
+## Copyright (C) 2025 - 2025 ENCRYPTED SUPPORT LLC <adrelanos@whonix.org>
+## See the file COPYING for copying conditions.
+
+set -x
+set -e
+set -o pipefail
+
+## Add an `x-systemd.growfs` parameter to the mount options for the root
+## partition. This will make systemd grow the filesystem inside in the event
+## systemd-repart grew the partition during bootup.
+sed -i 's/\(.*by-uuid.*defaults[^ ]*\)/\1,x-systemd.growfs/' /etc/fstab
