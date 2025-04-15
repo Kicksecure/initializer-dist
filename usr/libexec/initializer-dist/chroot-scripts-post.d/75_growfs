@@ -7,7 +7,30 @@ set -x
 set -e
 set -o pipefail
 
+temp1="$(mktemp)"
+temp2="$(mktemp)"
+
+trap exit_handler EXIT
+
+exit_handler() {
+  safe-rm --force --verbose -- "$temp1"
+  safe-rm --force --verbose -- "$temp2"
+}
+
+true "$0: fstab before:"
+cat -- /etc/fstab | tee -- "$temp1"
+
 ## Add an `x-systemd.growfs` parameter to the mount options for the root
 ## partition. This will make systemd grow the filesystem inside in the event
 ## systemd-repart grew the partition during bootup.
 sed -i 's/\(.*by-uuid.*defaults[^ ]*\)/\1,x-systemd.growfs/' /etc/fstab
+
+true "$0: fstab after:"
+cat -- /etc/fstab | tee -- "$temp2"
+
+true "$0: fstab diff:"
+if diff -- "$temp1" "$temp2" ; then
+  true "$0: /etc/fstab has no difference."
+else
+  true "$0: /etc/fstab changes made."
+fi
