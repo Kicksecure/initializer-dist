@@ -11,6 +11,7 @@ set -o pipefail
 ## ISO and wouldn't be effective on a system installed by a live ISO. We also
 ## don't enable it for Qubes systems, as Qubes has its own filesystem resize
 ## tooling.
+build_version_file="/var/lib/dist-base-files/build_version"
 if [ -f "$build_version_file" ]; then
   true "INFO: Skipping $0 because build_version_file $build_version_file already exists."
   exit 0
