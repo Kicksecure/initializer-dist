@@ -8,36 +8,36 @@ set -e
 set -o pipefail
 
 ## Live ISO:
-## We don't add growfs support for ISO builds. This makes no sense for a live
-## ISO and wouldn't be effective on a system installed by a live ISO.
-## systemd-repart is disabled for live-build builds because it does not
-## work on ISO-based installations. This is because the Kicksecure ISO uses
-## an MBR partition table on BIOS systems; the version of Calamares in
-## bookworm-backports is not capable enough to use GPT on BIOS systems as we
-## would like. systemd-repart requires a GPT partition table. It does not
-## work on MBR systems. Thus, we do not install the systemd-repart
-## configuration files in this scenario.
+##   We don't add growfs support for ISO builds. This makes no sense for a
+##   live ISO and wouldn't be effective on a system installed by a live ISO.
+##   systemd-repart is disabled for live-build builds because it does not
+##   work on ISO-based installations. This is because the Kicksecure ISO
+##   uses an MBR partition table on BIOS systems; the version of Calamares
+##   in bookworm-backports is not capable enough to use GPT on BIOS systems
+##   as we would like. systemd-repart requires a GPT partition table. It
+##   does not work on MBR systems. Thus, we do not install the systemd-repart
+##   configuration files in this scenario.
 
 ## Qubes Generally:
-## We also
-## don't enable it for Qubes systems, as Qubes has its own filesystem resize
-## tooling.
-## We also don't enable systemd-repart on Qubes OS templates, since Qubes
-## has its own partition resize tooling.
+##   We also don't enable it for Qubes systems, as Qubes has its own
+##   filesystem resize tooling.
+##   We also don't enable systemd-repart on Qubes OS templates, since Qubes
+##   has its own partition resize tooling.
 
 ## Distribution morphing:
-## chroot-scripts are, at the time of writing, not executed during distribution morphing.
-## In case of distribution morphing, we want to skip this. This is because
-## we do not know the partition layout and do not want to touch it.
+##   chroot-scripts are, at the time of writing, not executed during
+##   distribution morphing.
+##   In case of distribution morphing, we want to skip this. This is because
+##   we do not know the partition layout and do not want to touch it.
 
 ## Existing builds:
-## We don't enable it on
-## already-installed systems of any kind (VM, physical), because it requires partition
-## table tweaks to actually work and we don't want to do those to people's
-## existing systems to avoid data loss risks.
+##   We don't enable it on already-installed systems of any kind (VM,
+##   physical), because it requires partition table tweaks to actually work
+##   and we don't want to do those to people's existing systems to avoid
+##   data loss risks.
 
 ## New VM builds:
-## We want to enable this for new VM builds only.
+##   We want to enable this for new VM builds only.
 
 ## We cannot exclude systems with an existing build_version_file, because
 ## dist-base-files postinst that creates build_version_file rusn before this
