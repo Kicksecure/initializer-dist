@@ -24,11 +24,16 @@ set -o pipefail
 ## already-installed systems of any kind, because it requires partition
 ## table tweaks to actually work and we don't want to do those to people's
 ## existing systems.
-build_version_file="/var/lib/dist-base-files/build_version"
-if [ -f "$build_version_file" ]; then
-  true "INFO: Skipping $0 because build_version_file $build_version_file already exists."
-  exit 0
-fi
+
+## We cannot exclude systems with an existing build_version_file, because
+## dist-base-files postinst that creates build_version_file rusn before this
+## post chroot-script.
+# build_version_file="/var/lib/dist-base-files/build_version"
+# if [ -f "$build_version_file" ]; then
+#   true "INFO: Skipping $0 because build_version_file $build_version_file already exists."
+#   exit 0
+# fi
+
 if [ -f '/var/lib/dist-base-files/live_build' ]; then
   true "INFO: Skipping $0 because file /var/lib/dist-base-files/live_build exists."
   exit 0
