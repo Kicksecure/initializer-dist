@@ -18,18 +18,26 @@ set -o pipefail
 ## work on MBR systems. Thus we do not install the systemd-repart
 ## configuration files in this scenario.
 
-## Qubes:
+## Qubes Generally:
 ## We also
 ## don't enable it for Qubes systems, as Qubes has its own filesystem resize
 ## tooling.
 ## We also don't enable systemd-repart on Qubes OS templates, since Qubes
 ## has its own partition resize tooling.
 
+## Distribution morphing:
+## chroot-scripts are at time of writing not executed during distribution morphing.
+## In case of distribution morphing, we want to skip this. This is because
+## we do not know the partition layout and do not want to touch it.
+
 ## Existing builds:
-## Finally, we don't enable it on
-## already-installed systems of any kind, because it requires partition
+## We don't enable it on
+## already-installed systems of any kind (VM, physical), because it requires partition
 ## table tweaks to actually work and we don't want to do those to people's
-## existing systems.
+## existing systems to avoid data loss risks.
+
+## New VM builds:
+## We want to enable this for new VM builds only.
 
 ## We cannot exclude systems with an existing build_version_file, because
 ## dist-base-files postinst that creates build_version_file rusn before this
