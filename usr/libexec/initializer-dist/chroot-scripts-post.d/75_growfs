@@ -72,6 +72,9 @@ else
 fi
 
 ## NOTE: This is also done in dist-base-files.postinst.
+## dist-base-files postinst will only run
+## /usr/libexec/derivative-base-files/repart-enable
+## in case file /var/lib/kicksecure/status-files/repart-version-1 exists.
 /usr/libexec/derivative-base-files/repart-enable
 
 mkdir --parents /var/lib/kicksecure/status-files
