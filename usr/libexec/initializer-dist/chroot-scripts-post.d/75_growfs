@@ -8,14 +8,14 @@ set -e
 set -o pipefail
 
 ## Live ISO:
-## We don't add growfs support for ISO builds, this makes no sense for a live
+## We don't add growfs support for ISO builds. This makes no sense for a live
 ## ISO and wouldn't be effective on a system installed by a live ISO.
-## systemd-repart is disabled for live-build builds, because it does not
+## systemd-repart is disabled for live-build builds because it does not
 ## work on ISO-based installations. This is because the Kicksecure ISO uses
 ## an MBR partition table on BIOS systems; the version of Calamares in
 ## bookworm-backports is not capable enough to use GPT on BIOS systems as we
-## would like. systemd-repart requires a GPT partition table, it does not
-## work on MBR systems. Thus we do not install the systemd-repart
+## would like. systemd-repart requires a GPT partition table. It does not
+## work on MBR systems. Thus, we do not install the systemd-repart
 ## configuration files in this scenario.
 
 ## Qubes Generally:
@@ -26,7 +26,7 @@ set -o pipefail
 ## has its own partition resize tooling.
 
 ## Distribution morphing:
-## chroot-scripts are at time of writing not executed during distribution morphing.
+## chroot-scripts are, at the time of writing, not executed during distribution morphing.
 ## In case of distribution morphing, we want to skip this. This is because
 ## we do not know the partition layout and do not want to touch it.
 
