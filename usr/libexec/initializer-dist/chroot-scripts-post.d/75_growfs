@@ -71,6 +71,9 @@ else
   true "$0: /etc/fstab changes made."
 fi
 
+## NOTE: This is also done in dist-base-files.postinst.
+/usr/libexec/derivative-base-files/repart-enable
+
 mkdir --parents /var/lib/kicksecure/status-files
 ## Doing this since 17.3.6.5 and above.
 touch /var/lib/kicksecure/status-files/repart-version-1
