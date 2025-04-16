@@ -17,20 +17,26 @@ exit_handler() {
   safe-rm --force --verbose -- "$temp2"
 }
 
-true "$0: fstab before:"
-cat -- /etc/fstab | tee -- "$temp1"
+## We don't add growfs support for ISO builds, this makes no sense for a live
+## ISO and wouldn't be effective on a system installed by a live ISO. We also
+## don't enable it for Qubes systems, as Qubes has its own filesystem resize
+## tooling.
+if ! [ -f '/var/lib/dist-base-files/live_build' ] && ! [ -f '/usr/share/qubes/marker-vm' ]; then
+  true "$0: fstab before:"
+  cat -- /etc/fstab | tee -- "$temp1"
 
-## Add an `x-systemd.growfs` parameter to the mount options for the root
-## partition. This will make systemd grow the filesystem inside in the event
-## systemd-repart grew the partition during bootup.
-sed -i 's/\(.*by-uuid.*defaults[^ ]*\)/\1,x-systemd.growfs/' /etc/fstab
+  ## Add an `x-systemd.growfs` parameter to the mount options for the root
+  ## partition. This will make systemd grow the filesystem inside in the event
+  ## systemd-repart grew the partition during bootup.
+  sed -i 's/\(.*by-uuid.*defaults[^ ]*\)/\1,x-systemd.growfs/' /etc/fstab
 
-true "$0: fstab after:"
-cat -- /etc/fstab | tee -- "$temp2"
+  true "$0: fstab after:"
+  cat -- /etc/fstab | tee -- "$temp2"
 
-true "$0: fstab diff:"
-if diff -- "$temp1" "$temp2" ; then
-  true "$0: /etc/fstab has no difference."
-else
-  true "$0: /etc/fstab changes made."
+  true "$0: fstab diff:"
+  if diff -- "$temp1" "$temp2" ; then
+    true "$0: /etc/fstab has no difference."
+  else
+    true "$0: /etc/fstab changes made."
+  fi
 fi
