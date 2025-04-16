@@ -7,16 +7,6 @@ set -x
 set -e
 set -o pipefail
 
-temp1="$(mktemp)"
-temp2="$(mktemp)"
-
-trap exit_handler EXIT
-
-exit_handler() {
-  safe-rm --force --verbose -- "$temp1"
-  safe-rm --force --verbose -- "$temp2"
-}
-
 ## We don't add growfs support for ISO builds, this makes no sense for a live
 ## ISO and wouldn't be effective on a system installed by a live ISO. We also
 ## don't enable it for Qubes systems, as Qubes has its own filesystem resize
@@ -33,6 +23,16 @@ if [ -f '/usr/share/qubes/marker-vm' ]; then
   true "INFO: Skipping $0 because Qubes has been detected."
   exit 0
 fi
+
+temp1="$(mktemp)"
+temp2="$(mktemp)"
+
+trap exit_handler EXIT
+
+exit_handler() {
+  safe-rm --force --verbose -- "$temp1"
+  safe-rm --force --verbose -- "$temp2"
+}
 
 true "$0: fstab before:"
 cat -- /etc/fstab | tee -- "$temp1"
