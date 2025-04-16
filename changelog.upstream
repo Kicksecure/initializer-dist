@@ -1,3 +1,88 @@
+commit da0c6c56c3e7fbd6179c13f6793a16086b2e3621
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Apr 16 18:35:20 2025 -0400
+
+    comments
+
+commit b9a54d07aff1643748e180b0cefe64bd53a16071
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Apr 16 18:33:02 2025 -0400
+
+    comments
+
+commit 3fe4d67d1f7abc642c907609addc989cddfcdba3
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Apr 16 18:32:06 2025 -0400
+
+    comments
+
+commit 6894a5515dbc97f81a2032a1d9cde38cb6fefe8e
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Apr 16 18:29:04 2025 -0400
+
+    comments
+
+commit 9b39e3e94d1a69064ee6e66f27b32020dada7fde
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Apr 16 18:26:43 2025 -0400
+
+    comment
+
+commit efbcad313842c0e8369de1704cd4d67eec76ede4
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Apr 16 18:22:57 2025 -0400
+
+    fix
+
+commit ff70d643803ce6fa64b49eed2a79f3d91b1c4713
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Apr 16 18:18:09 2025 -0400
+
+    fix
+
+commit 6153687e1ef5069abbacb4626936aa5339e276c9
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Apr 16 18:17:08 2025 -0400
+
+    comment
+
+commit 51f18cadf24bdb06b8417b027d12597eadf094b1
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Apr 16 18:07:53 2025 -0400
+
+    fix
+
+commit 687b046403c7a20bb664fe3fda753fd9549026dc
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Apr 16 18:06:53 2025 -0400
+
+    fix
+
+commit 9ff77dfd9fdc1576778a0ccea78da5c75c55f2d9
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Apr 16 18:06:27 2025 -0400
+
+    refactoring
+
+commit 84405f3755d08ab49c75c3685996d0afc67a440e
+Merge: bf98119 b2d64ad
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Apr 16 18:04:10 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/repart'
+
+commit b2d64ade791766270935b6641a46275c309eb66a
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Tue Apr 15 21:22:37 2025 -0500
+
+    Don't enable root filesystem autogrow for ISOs and Qubes
+
+commit bf981196d5d4abeadace28702a75db954e4ba2a2
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Apr 15 20:59:18 2025 +0000
+
+    bumped changelog version
+
 commit e2d279477f475eda2fdfa98a81cbd66262271fce
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Tue Apr 15 16:48:17 2025 -0400
