@@ -91,6 +91,9 @@ fi
 ## in case file /var/lib/kicksecure/status-files/repart-version-1 exists.
 /usr/libexec/derivative-base-files/repart-enable
 
+## NOTE: /usr/libexec/derivative-base-files/repart-enable does not re-generate
+##       the initramfs using "dracut -f".
+
 mkdir --parents /var/lib/kicksecure/status-files
 ## Doing this since 17.3.6.5 and above.
 touch /var/lib/kicksecure/status-files/repart-version-1
