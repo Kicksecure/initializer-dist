@@ -1,3 +1,21 @@
+commit ea4bd47125475c5e5ccbe4cf1883edf49acdcccf
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Apr 17 12:27:12 2025 -0400
+
+    renamed: usr/libexec/initializer-dist/chroot-scripts-post.d/75_growfs -> usr/libexec/initializer-dist/75_growfs
+
+commit 7495ebfc74f36d974919027d6d1411061b6b3535
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Apr 17 12:25:56 2025 -0400
+
+    comment
+
+commit 729c0b1e4041a461038fcee31092340a398cf286
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Apr 16 22:51:59 2025 +0000
+
+    bumped changelog version
+
 commit da0c6c56c3e7fbd6179c13f6793a16086b2e3621
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Wed Apr 16 18:35:20 2025 -0400
