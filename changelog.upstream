@@ -1,3 +1,15 @@
+commit c93eeb7eb6dba5c7dde6f2ee2f5de2127513021b
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Apr 17 16:54:20 2025 -0400
+
+    add `/usr/share/initializer-dist/dracut/90-derivative-maker-build.conf`
+
+commit 6b43c8628cdfa0c38ea35461590d0febd2acb17e
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Apr 17 16:31:41 2025 +0000
+
+    bumped changelog version
+
 commit ea4bd47125475c5e5ccbe4cf1883edf49acdcccf
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Thu Apr 17 12:27:12 2025 -0400
