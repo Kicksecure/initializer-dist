@@ -26,7 +26,10 @@ fi
 
 dpkg --configure -a
 
-sysctl -p
+## Disabled. Trixie no longer ships sysctl.conf, but sysctl -p assumes
+## sysctl.conf exists. The file was entirely commented out anyway, so this was
+## little more than a no-op.
+#sysctl -p
 
 DEBIAN_FRONTEND=noninteractive dpkg-reconfigure tzdata
 
