@@ -58,6 +58,16 @@ timedatectl set-ntp false >/dev/null 2>&1 || true
 ## Make sure it gets really deleted even if timedatectl does not work.
 safe-rm --force /etc/systemd/system/sysinit.target.wants/systemd-timesyncd.service
 
+## Deletes /etc/apt/sources.list.d/derivative.sources.
+## Otherwise garbage apt config pointing to the derivative-maker approx proxy
+## will be left on the disk.
+safe-rm --force /etc/apt/sources.list.d/derivative.sources
+
+## Deletes /etc/apt/sources.list.
+## This file is no longer used since we've switched to deb822 format, and it
+## ends up being left as a blank file on the disk.
+safe-rm --force /etc/apt/sources.list
+
 ## non-deterministic [0]
 ## /var/lib/dpkg/available
 ## /var/lib/dpkg/available-old
