@@ -9,6 +9,11 @@ set -o nounset
 set -o errtrace
 set -o pipefail
 
+unexpected_key_file() {
+   error "ERROR: unexpected key file found!"
+   exit 1
+}
+
 own_filename="$(basename "$BASH_SOURCE")"
 for skip_script in ${SKIP_SCRIPTS-}; do
    if [ "$skip_script" = "$own_filename" ]; then
@@ -73,7 +78,7 @@ source /usr/sbin/shim-signed-mok-setup
 ## sets: 'dkms_mok_*' variables
 dkms_mok_variables_set
 
-! test -e "${dkms_mok_public_file}"
-! test -e "${dkms_mok_private_file}"
-! test -e "${shim_mok_public_file}"
-! test -e "${shim_mok_private_file}"
+! test -e "${dkms_mok_public_file}" || unexpected_key_file
+! test -e "${dkms_mok_private_file}" || unexpected_key_file
+! test -e "${shim_mok_public_file}" || unexpected_key_file
+! test -e "${shim_mok_private_file}" || unexpected_key_file
