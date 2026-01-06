@@ -1,3 +1,27 @@
+commit b4df995e0fb33a7d538f2f4d0774a87c47e4949c
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Jan 6 08:27:28 2026 -0500
+
+    shellcheck
+
+commit 7ca5c254bcaa0e7cf3c34781550743afba485fc2
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Jan 6 08:25:23 2026 -0500
+
+    improve
+
+commit 5e7c2d5f5ca1cc20a1c476c9e7547f0d715e5a90
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Jan 6 08:23:30 2026 -0500
+
+    make sure DKMS signing keys are not created during the build process
+
+commit ddf0bbec1d679795b55862f720716cd9d810c5ab
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Sep 19 16:13:28 2025 +0000
+
+    bumped changelog version
+
 commit 6454480a65bb4f69080f47dcbc996f5e790f369d
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Thu Sep 18 10:07:33 2025 -0400
