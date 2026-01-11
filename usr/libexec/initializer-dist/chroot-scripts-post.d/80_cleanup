@@ -48,7 +48,7 @@ safe-rm -r /var/lib/apt/lists/* || true
 safe-rm -r /var/log/installer || true
 safe-rm /var/lib/dpkg/*-old || true
 safe-rm /var/cache/debconf/*-old || true
-## Erase rotated logs (usually wont appear unless you left your VM running for several days).
+## Erase rotated logs (usually won't appear unless you left your VM running for several days).
 safe-rm /var/log/*.[0-9] || true
 safe-rm /var/log/*.[0-9].gz || true
 
