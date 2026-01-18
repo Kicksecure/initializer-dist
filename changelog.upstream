@@ -1,3 +1,22 @@
+commit 64447b78f6b765fd6871ccbd7dd4ac61d962ba64
+Merge: 18e9a2f 041bcc0
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Jan 18 05:11:04 2026 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit 041bcc016b7f26b6305112710e86c86318ebd9f4
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sat Jan 17 19:16:01 2026 -0600
+
+    Add config snippet for disabling DKMS MOK generation
+
+commit 18e9a2fd36162d48dd51d8ae14fe4f16298f3290
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Jan 11 16:25:06 2026 +0000
+
+    bumped changelog version
+
 commit d53314139d4ef890bec23c939b0442302af3eade
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Sun Jan 11 10:50:13 2026 -0500
