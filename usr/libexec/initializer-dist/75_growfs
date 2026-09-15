@@ -11,6 +11,7 @@ set -o pipefail
 set -o errtrace
 shopt -s inherit_errexit
 shopt -s shift_verbose
+export LC_ALL=C
 
 ## Live ISO:
 ##   We don't add growfs support for ISO builds. This makes no sense for a
@@ -53,8 +54,8 @@ shopt -s shift_verbose
 #   exit 0
 # fi
 
-if [ -f '/var/lib/dist-base-files/live_build' ]; then
-  true "INFO: Skipping $0 because file /var/lib/dist-base-files/live_build exists."
+if [ "${dist_build_iso:-}" = "true" ]; then
+  true "INFO: Skipping $0 because this is an ISO/live build (dist_build_iso=true)."
   exit 0
 fi
 if [ -f '/usr/share/qubes/marker-vm' ]; then
