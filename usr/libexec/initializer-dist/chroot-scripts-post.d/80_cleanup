@@ -81,6 +81,36 @@ clean_apt() {
 ## "Holds an answer" is a 'Value:' field, not a non-zero size: the two prompts above are
 ## 180 bytes of question ownership with no answer, which is the empty case. Report the
 ## offending question NAMES on failure, never their values.
+
+## Print the 'Name:' line of every debconf record that actually carries a
+## 'Value:' line (an answer), skipping records that only own a question. debconf
+## records are blank-line separated (822-style); pure-bash scan, no awk (R-035).
+report_answered_question_names() {
+   local passwords_dat="$1"
+   local line name="" has_value="false"
+   while IFS= read -r line || [ -n "${line}" ]; do
+      case "${line}" in
+         "")
+            if [ "${has_value}" = "true" ] && [ -n "${name}" ]; then
+               printf '%s\n' "${name}"
+            fi
+            name=""
+            has_value="false"
+            ;;
+         Name:*)
+            name="${line}"
+            ;;
+         Value:*)
+            has_value="true"
+            ;;
+      esac
+   done < "${passwords_dat}"
+   ## Flush the final record (the file need not end with a blank line).
+   if [ "${has_value}" = "true" ] && [ -n "${name}" ]; then
+      printf '%s\n' "${name}"
+   fi
+}
+
 ## $1 is an optional data-file override for unit tests; production uses the default.
 # shellcheck disable=SC2120
 check_debconf_passwords() {
@@ -91,8 +121,7 @@ check_debconf_passwords() {
          printf '%s\n' "ERROR: ${own_filename}: ${passwords_dat} holds stored answers." >&2
          printf '%s\n' "A password was captured during the build; refusing to ship it or to delete it silently." >&2
          printf '%s\n' "affected question(s):" >&2
-         ## FIXME: Only print question names that have an associated value.
-         grep -- '^Name:' "${passwords_dat}" >&2
+         report_answered_question_names "${passwords_dat}" >&2
          return 1
       fi
       safe-rm --force -- "${passwords_dat}"
