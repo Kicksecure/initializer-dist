@@ -1,8 +1,12 @@
-#!/bin/bash
+#!/bin/bash -e
 
 ## Copyright (C) 2012 - 2025 ENCRYPTED SUPPORT LLC <adrelanos@whonix.org>
 ## See the file COPYING for copying conditions.
 
+## errexit on the shebang (direct run only; ignored when sourced) so a failed
+## 'source' below ABORTS: without it a missing helper-scripts leaves was_executed
+## undefined, both guards' conditions fail quietly, main() never runs, and the
+## script exits 0 -- a false success that ships an uncleaned image.
 # shellcheck source=../../../../../helper-scripts/usr/libexec/helper-scripts/check_runtime.bsh
 source "${HELPER_SCRIPTS_PATH:-}"/usr/libexec/helper-scripts/check_runtime.bsh
 
@@ -174,9 +178,9 @@ check_debconf_device_leak() {
    debconf_device_leak_pattern='/dev/(loop|mapper|sd[a-z]|nvme[0-9]|vd[a-z]|xvd[a-z]|md[0-9]|mmcblk[0-9]|nbd[0-9])'
    if debconf_device_leak_detect_output="$(grep \
       --before-context=2 --extended-regexp -- "${debconf_device_leak_pattern}" \
-      "${config_dat}" >&2)"; then
+      "${config_dat}")"; then
       printf '%s\n' "ERROR: ${own_filename}: build-host device references remain in ${config_dat}:" >&2
-      printf '%s\n' "${debconf_device_leak_detect_output}"
+      printf '%s\n' "${debconf_device_leak_detect_output}" >&2
       return 1
    fi
 }
