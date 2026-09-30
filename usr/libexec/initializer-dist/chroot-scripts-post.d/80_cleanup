@@ -271,10 +271,12 @@ clean_seeds_and_ids() {
    ## nvme-cli's postinst writes random values here (nvme gen-hostnqn / uuidgen), only at
    ## package configure time and only when missing or empty -- never at boot. So they
    ## differ per build (breaks reproducibility) and would carry the build host's id;
-   ## delete them. Absence is safe: local NVMe needs neither, and for NVMe-over-Fabrics
-   ## libnvme regenerates an id + NQN at connect time from the DMI system UUID (in memory,
-   ## not on disk). See libnvme nvme_host_get_ids() (src/nvme/tree.c) and
-   ## nvmf_hostid_generate() (src/nvme/fabrics.c).
+   ## delete them. These images do not use NVMe-over-Fabrics (the only consumer of these
+   ## files) and local NVMe disks need neither, so absence has no effect here. If NVMe-oF
+   ## were used, libnvme derives an id/NQN in memory at connect time (DMI UUID, else
+   ## device-tree, else random) and never persists it back here -- not a stable stored
+   ## identity. See libnvme nvme_host_get_ids() (src/nvme/tree.c) and nvmf_hostid_generate()
+   ## (src/nvme/fabrics.c).
    safe-rm --force -- /etc/nvme/hostid
    safe-rm --force -- /etc/nvme/hostnqn
 
