@@ -1,3 +1,92 @@
+commit 5dcf48e005d269e24bc3882bbdb355bbfd784d7d
+Merge: f2356ae 71e06b5
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Oct 2 04:10:09 2026 -0400
+
+    Merge remote-tracking branch 'refs/remotes/ArrayBolt3/arraybolt3/trixie'
+
+commit 71e06b53d563caec6c19257989f0cc12766d0ebd
+Author: Aaron Rainbolt <arraybolt3@gmail.com>
+Date:   Fri Oct 2 01:09:01 2026 -0400
+
+    Polish and reorganize 80_cleanup
+
+commit 76b90b4eebc3c5d11d12be51fb56288475f6ef45
+Merge: f2356ae 371abd8
+Author: Aaron Rainbolt <arraybolt3@gmail.com>
+Date:   Thu Oct 1 23:42:14 2026 -0400
+
+    Merge branch 'ai' into arraybolt3/trixie
+
+commit 371abd8170dd6c293db094a6600027715f4c16f6
+Author: claude (dev776 816cea71-3112-42bc-9153-6b7983d8c0ca) <noreply@anthropic.com>
+Date:   Wed Sep 30 08:34:19 2026 -0400
+
+    Fail loud on missing helper-scripts; fix leak diagnostic
+
+    - errexit shebang + helper-scripts Depends: a missing lib now aborts
+      instead of leaving was_executed undefined, skipping main() and exiting
+      0 -- a false success that shipped an uncleaned image.
+    - check_debconf_device_leak: the '>&2' sat inside the $() capture, so the
+      diagnostic variable was always empty; capture the matched lines and
+      print them to stderr.
+
+    Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
+
+commit 7fcc0d375a84f0edd2e493d1d353abaca94da69a
+Author: claude (dev777 fd41c471-449d-4648-bed2-4fcdeae906f8) <noreply@anthropic.com>
+Date:   Wed Sep 30 08:12:18 2026 -0400
+
+    80_cleanup: scope nvme absence claim, note random fallback
+
+    Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
+
+commit 4b66d543608f8e929979095a1362d490d06c15d7
+Author: claude (dev777 fd41c471-449d-4648-bed2-4fcdeae906f8) <noreply@anthropic.com>
+Date:   Wed Sep 30 07:50:41 2026 -0400
+
+    80_cleanup: correct nvme hostid/hostnqn comment
+
+    Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
+
+commit 1d6b3f12c17d701231d1406c90aabd9e432004eb
+Author: claude (dev776 816cea71-3112-42bc-9153-6b7983d8c0ca) <noreply@anthropic.com>
+Date:   Wed Sep 30 07:46:11 2026 -0400
+
+    Report only debconf questions that hold an answer
+
+    - On the passwords.dat refusal, list the Name of each record that
+      actually carries a Value: line, not every question in the file
+      (resolves the in-code FIXME). Pure-bash 822 record scan, no awk.
+
+    Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
+
+commit 79850680638d29c10192bb71535b2845c607faf8
+Author: claude (dev776 816cea71-3112-42bc-9153-6b7983d8c0ca) <noreply@anthropic.com>
+Date:   Wed Sep 30 07:32:09 2026 -0400
+
+    Make 80_cleanup source-able; split into functions
+
+    - was_executed guard so a unit test can source it without running or
+      inheriting strict-mode.
+    - debconf password / device-leak checks now pure functions with an
+      optional file-path arg, callable in isolation.
+
+    Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
+
+commit 2431d86d655b489f6386026e7c2195abd18a6901
+Merge: 68d0ac5 f2356ae
+Author: assisted-by-ai <assisted-by-ai@users.noreply.github.com>
+Date:   Tue Sep 15 11:06:01 2026 -0400
+
+    Merge master into ai (remaster)
+
+commit f2356aed13c233a7ec88ba98e45494cd40aa2654
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Sep 15 14:52:55 2026 +0000
+
+    bumped changelog version
+
 commit 7179315b6e75c549742a9527998bdf9021859a1e
 Merge: 02f167c 68d0ac5
 Author: Patrick Schleizer <adrelanos@whonix.org>
