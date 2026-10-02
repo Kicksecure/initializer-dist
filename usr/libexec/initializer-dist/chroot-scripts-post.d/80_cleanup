@@ -1,62 +1,79 @@
-#!/bin/bash
+#!/bin/bash -e
 
 ## Copyright (C) 2012 - 2025 ENCRYPTED SUPPORT LLC <adrelanos@whonix.org>
 ## See the file COPYING for copying conditions.
 
-set -x
-set -o errexit
-set -o nounset
-set -o pipefail
-set -o errtrace
-shopt -s inherit_errexit
-shopt -s shift_verbose
-export LC_ALL=C
+## errexit on the shebang (direct run only; ignored when sourced) so a failed
+## 'source' below ABORTS: without it a missing helper-scripts leaves was_executed
+## undefined, both guards' conditions fail quietly, main() never runs, and the
+## script exits 0 -- a false success that ships an uncleaned image.
+# shellcheck source=../../../../../helper-scripts/usr/libexec/helper-scripts/check_runtime.bsh
+source "${HELPER_SCRIPTS_PATH:-}"/usr/libexec/helper-scripts/check_runtime.bsh
 
-own_filename="$(basename -- "${BASH_SOURCE[0]}")"
-## SKIP_SCRIPTS is an optional space-separated list from the chroot runner; default it
-## empty so 'nounset' does not abort when no scripts are being skipped. Word-splitting is
-## intentional (it is a list), hence the deliberately unquoted expansion.
-# shellcheck disable=SC2086
-for skip_script in ${SKIP_SCRIPTS:-}; do
-   if [ "${skip_script}" = "${own_filename}" ]; then
-      true "INFO: Skipping ${own_filename}, because SKIP_SCRIPTS includes it."
-      exit 0
-   fi
-done
-unset skip_script
+if was_executed "${BASH_SOURCE[0]}"; then
+   set -x
+   set -o errexit
+   set -o nounset
+   set -o pipefail
+   set -o errtrace
+   shopt -s inherit_errexit
+   shopt -s shift_verbose
+   export LC_ALL=C
+fi
 
-true "INFO: Cleaning up..."
+should_skip() {
+   local own_filename="$1"
+   local skip_script
+   ## SKIP_SCRIPTS is an optional space-separated list from the chroot runner; default it
+   ## empty so 'nounset' does not abort when no scripts are being skipped. Word-splitting is
+   ## intentional (it is a list), hence the deliberately unquoted expansion.
+   # shellcheck disable=SC2086
+   for skip_script in ${SKIP_SCRIPTS:-}; do
+      if [ "${skip_script}" = "${own_filename}" ]; then
+         true "INFO: Skipping ${own_filename}, because SKIP_SCRIPTS includes it."
+         return 0
+      fi
+   done
+   return 1
+}
 
-## Kill dhclient3 to prevent rewrite of /var/lib/dhcp/*.
-killall dhclient3 || true
-## There are .leases.
-safe-rm -- /var/lib/dhcp/*.leases || true
-## And there are .lease.
-safe-rm -- /var/lib/dhcp/*.lease || true
-## We are best of deleting the whole folder.
-safe-rm -r -- /var/lib/dhcp/* || true
+clean_dhcp() {
+   ## Kill dhclient3 to prevent rewrite of /var/lib/dhcp/*.
+   killall dhclient3 || true
+   ## There are .leases.
+   safe-rm -- /var/lib/dhcp/*.leases || true
+   ## And there are .lease.
+   safe-rm -- /var/lib/dhcp/*.lease || true
+   ## We are best of deleting the whole folder.
+   safe-rm -r -- /var/lib/dhcp/* || true
+}
 
-## Cleanup.
-## || true to support re-running the script.
-apt-get --yes autoremove --purge || true
+clean_apt() {
+   ## style-ok: allow-apt-get -- plain apt-get in a build-time chroot cleanup, --yes given
+   ## Cleanup.
+   ## || true to support re-running the script.
+   apt-get --yes autoremove --purge || true
 
-## Get rid of /var/cache/apt/pkgcache.bin. (non-deterministic)
-## || true to support re-running the script.
-apt-get --yes clean || true
+   ## Get rid of /var/cache/apt/pkgcache.bin. (non-deterministic)
+   ## || true to support re-running the script.
+   apt-get --yes clean || true
 
-## No longer deleting /var/lib/tor. We install but forbid to run software such as Tor we install.
-## Therefore /var/lib/tor should be empty.
-## Ensure to delete /var/lib/tor. It contains sensitive stuff like the Tor consensus and the Tor entry guards.
-## safe-rm -r /var/lib/tor/* || true
+   ## No longer deleting /var/lib/tor. We install but forbid to run software such as Tor we install.
+   ## Therefore /var/lib/tor should be empty.
+   ## Ensure to delete /var/lib/tor. It contains sensitive stuff like the Tor consensus and the Tor entry guards.
+   ## safe-rm -r /var/lib/tor/* || true
 
-## Delete logs and other stuff.
-safe-rm -r -- /tmp/* || true
-safe-rm -- /var/log/installer/* || true
-safe-rm -r -- /var/cache/apt/* || true
-safe-rm -r -- /var/lib/apt/lists/* || true
-safe-rm -r -- /var/log/installer || true
-safe-rm -- /var/lib/dpkg/*-old || true
-safe-rm -- /var/cache/debconf/*-old || true
+   ## Delete logs and other stuff.
+   ## style-ok: no-tmp-hardcode -- purging the chroot's own /tmp before shipping, not a
+   ## redirectable temp path this script creates; ${TMP} would be semantically wrong here.
+   safe-rm -r -- /tmp/* || true
+   safe-rm -- /var/log/installer/* || true
+   safe-rm -r -- /var/cache/apt/* || true
+   safe-rm -r -- /var/lib/apt/lists/* || true
+   safe-rm -r -- /var/log/installer || true
+   safe-rm -- /var/lib/dpkg/*-old || true
+   safe-rm -- /var/cache/debconf/*-old || true
+}
 
 ## Drop the debconf PASSWORD database, but never silently. debconf stores password answers
 ## here (mode 600), so a database holding an ANSWER means the build captured a credential:
@@ -68,17 +85,52 @@ safe-rm -- /var/cache/debconf/*-old || true
 ## "Holds an answer" is a 'Value:' field, not a non-zero size: the two prompts above are
 ## 180 bytes of question ownership with no answer, which is the empty case. Report the
 ## offending question NAMES on failure, never their values.
-if [ -f /var/cache/debconf/passwords.dat ]; then
-   if grep --quiet -- '^Value:' /var/cache/debconf/passwords.dat; then
-      printf '%s\n' "ERROR: ${own_filename}: /var/cache/debconf/passwords.dat holds stored answers." >&2
-      printf '%s\n' "A password was captured during the build; refusing to ship it or to delete it silently." >&2
-      printf '%s\n' "affected question(s):" >&2
-      ## FIXME: Only print question names that have an associated value.
-      grep -- '^Name:' /var/cache/debconf/passwords.dat >&2
-      exit 1
+
+## Print the 'Name:' line of every debconf record that actually carries a
+## 'Value:' line (an answer), skipping records that only own a question. debconf
+## records are blank-line separated (822-style); pure-bash scan, no awk (R-035).
+report_answered_question_names() {
+   local passwords_dat="$1"
+   local line name="" has_value="false"
+   while IFS= read -r line || [ -n "${line}" ]; do
+      case "${line}" in
+         "")
+            if [ "${has_value}" = "true" ] && [ -n "${name}" ]; then
+               printf '%s\n' "${name}"
+            fi
+            name=""
+            has_value="false"
+            ;;
+         Name:*)
+            name="${line}"
+            ;;
+         Value:*)
+            has_value="true"
+            ;;
+      esac
+   done < "${passwords_dat}"
+   ## Flush the final record (the file need not end with a blank line).
+   if [ "${has_value}" = "true" ] && [ -n "${name}" ]; then
+      printf '%s\n' "${name}"
    fi
-   safe-rm --force -- /var/cache/debconf/passwords.dat
-fi
+}
+
+## $1 is an optional data-file override for unit tests; production uses the default.
+# shellcheck disable=SC2120
+check_debconf_passwords() {
+   local passwords_dat="${1:-/var/cache/debconf/passwords.dat}"
+   local own_filename="${own_filename:-80_cleanup}"
+   if [ -f "${passwords_dat}" ]; then
+      if grep --quiet -- '^Value:' "${passwords_dat}"; then
+         printf '%s\n' "ERROR: ${own_filename}: ${passwords_dat} holds stored answers." >&2
+         printf '%s\n' "A password was captured during the build; refusing to ship it or to delete it silently." >&2
+         printf '%s\n' "affected question(s):" >&2
+         report_answered_question_names "${passwords_dat}" >&2
+         return 1
+      fi
+      safe-rm --force -- "${passwords_dat}"
+   fi
+}
 
 ## KEEP the debconf answers database (config.dat). Measured byte-identical across four
 ## builds on two machines, and every stored answer is package configuration (keymap,
@@ -99,12 +151,17 @@ fi
 ##
 ## Keeping LC_ALL=C here even though it's declared above to prevent potential
 ## future bugs.
-grep --only-matching --extended-regexp -- '^Name: grub-[^/[:space:]]+/install_devices[a-z_]*' \
-   /var/cache/debconf/config.dat \
-   | cut -d' ' -f2- \
-   | LC_ALL=C sort --unique \
-   | sed 's/^/RESET /' \
-   | debconf-communicate >/dev/null || true
+## $1 is an optional data-file override for unit tests; production uses the default.
+# shellcheck disable=SC2120
+reset_debconf_grub_devices() {
+   local config_dat="${1:-/var/cache/debconf/config.dat}"
+   grep --only-matching --extended-regexp -- '^Name: grub-[^/[:space:]]+/install_devices[a-z_]*' \
+      "${config_dat}" \
+      | cut -d' ' -f2- \
+      | LC_ALL=C sort --unique \
+      | sed 's/^/RESET /' \
+      | debconf-communicate >/dev/null || true
+}
 
 ## Prove it worked. The answers database SHIPS, so a build-host block device left in it is a
 ## defect, not a warning: it leaks the build environment into the image, and because loop
@@ -112,149 +169,183 @@ grep --only-matching --extended-regexp -- '^Name: grub-[^/[:space:]]+/install_de
 ## already taken. Measured on a real image, config.dat contains exactly ONE /dev/ reference --
 ## the grub answer reset above -- so this fires only on a genuine leftover. Block devices are
 ## matched specifically, so a legitimate /dev/null answer never trips it.
-debconf_device_leak_pattern='/dev/(loop|mapper|sd[a-z]|nvme[0-9]|vd[a-z]|xvd[a-z]|md[0-9]|mmcblk[0-9]|nbd[0-9])'
-if debconf_device_leak_detect_output="$(grep \
-   --before-context=2 --extended-regexp -- "${debconf_device_leak_pattern}" \
-   /var/cache/debconf/config.dat >&2)"; then
-   printf '%s\n' "ERROR: ${own_filename}: build-host device references remain in /var/cache/debconf/config.dat:" >&2
-   printf '%s\n' "${debconf_device_leak_detect_output}"
-   exit 1
+## $1 is an optional data-file override for unit tests; production uses the default.
+# shellcheck disable=SC2120
+check_debconf_device_leak() {
+   local config_dat="${1:-/var/cache/debconf/config.dat}"
+   local own_filename="${own_filename:-80_cleanup}"
+   local debconf_device_leak_pattern debconf_device_leak_detect_output
+   debconf_device_leak_pattern='/dev/(loop|mapper|sd[a-z]|nvme[0-9]|vd[a-z]|xvd[a-z]|md[0-9]|mmcblk[0-9]|nbd[0-9])'
+   if debconf_device_leak_detect_output="$(grep \
+      --before-context=2 --extended-regexp -- "${debconf_device_leak_pattern}" \
+      "${config_dat}")"; then
+      printf '%s\n' "ERROR: ${own_filename}: build-host device references remain in ${config_dat}:" >&2
+      printf '%s\n' "${debconf_device_leak_detect_output}" >&2
+      return 1
+   fi
+}
+
+clean_nondeterministic() {
+   ## Do NOT delete templates.dat: it holds the question templates; removing it breaks
+   ## dpkg-reconfigure (2014 regression: `dpkg-reconfigure console-data` -> keymap "NONE").
+
+   ## non-deterministic
+   ## /var/cache/ldconfig/aux-cache -- ldconfig's binary auxiliary cache. Same size but
+   ## differing bytes between two independent builds (it records per-file identity, not just
+   ## paths). Safe to delete: ldconfig recreates it on the next run, and any package install
+   ## triggers one.
+   ##
+   ## TODO-HUMAN-ONLY: Verify that AI is correct about how the aux-cache works
+   safe-rm --force -- /var/cache/ldconfig/aux-cache || true
+
+   ## non-deterministic
+   ## /etc/locale.conf (target of the /etc/default/locale symlink) -- update-locale writes its
+   ## assignment lines in a non-deterministic order, so two builds differ by line order alone.
+   ## Sort it: the header comment sorts before the KEY=value lines, and the relative order of
+   ## those lines is irrelevant to every consumer.
+   if [ -f /etc/locale.conf ]; then
+      sort -- /etc/locale.conf | sponge -- /etc/locale.conf
+   fi
+
+   ## non-deterministic
+   ## /usr/lib/<multiarch>/vlc/plugins/plugins.dat -- VLC's plugin cache, written by
+   ## vlc-cache-gen in raw readdir order (VLC's AllocatePluginDir does not sort and
+   ## ignores SOURCE_DATE_EPOCH), so it differs build-to-build. No in-chroot way to
+   ## regenerate it deterministically without patching VLC. Safe to delete: VLC scans
+   ## plugins at startup when the cache is absent, and Debian's dpkg trigger on
+   ## /usr/lib/*/vlc/plugins rebuilds it on the next apt transaction (Debian #755154).
+   safe-rm --force -- /usr/lib/*/vlc/plugins/plugins.dat || true
+
+   ## Erase rotated logs (usually won't appear unless you left your VM running for several days).
+   safe-rm -- /var/log/*.[0-9] || true
+   safe-rm -- /var/log/*.[0-9].gz || true
+}
+
+clean_time_and_apt_sources() {
+   ## Deletes /etc/system/sysinit.target.wants/systemd-timesyncd.service.
+   ## Otherwise timedatectl still thinks systemd-timesyncd is enabled.
+   timedatectl set-ntp false >/dev/null 2>&1 || true
+   ## Make sure it gets really deleted even if timedatectl does not work.
+   safe-rm --force -- /etc/systemd/system/sysinit.target.wants/systemd-timesyncd.service
+
+   ## Deletes /etc/apt/sources.list.d/derivative.sources.
+   ## Otherwise garbage apt config pointing to the derivative-maker approx proxy
+   ## will be left on the disk.
+   safe-rm --force -- /etc/apt/sources.list.d/derivative.sources
+
+   ## Deletes /etc/apt/sources.list.
+   ## This file is no longer used since we've switched to deb822 format, and it
+   ## ends up being left as a blank file on the disk.
+   safe-rm --force -- /etc/apt/sources.list
+}
+
+clean_dpkg_and_init() {
+   ## non-deterministic [0]
+   ## /var/lib/dpkg/available
+   ## /var/lib/dpkg/available-old
+   dpkg --clear-avail
+
+   ## non-deterministic [14]
+   ## /etc/init.d/.depend.boot
+   ## /etc/init.d/.depend.start
+   ## /etc/init.d/.depend.stop
+   ## Recreate those and therefore hopefully come up with deterministic results.
+   ##
+   ## Only attempt to run `insserv` when it's installed. This ensures, that this
+   ## works on CI systems (Ubuntu) and in modified derivative versions as well.
+   if [ -x /sbin/insserv ]; then
+      /sbin/insserv --showall
+      /sbin/insserv --verbose
+   fi
+}
+
+clean_seeds_and_ids() {
+   ## non-deterministic [15]
+   ## /var/lib/urandom/random-seed
+   ## This is no longer required for Debian Jessie?
+   ## Should always be deleted for security reasons.
+   safe-rm --force -- /var/lib/urandom/random-seed
+
+   safe-rm --force -- /var/lib/systemd/random-seed
+   safe-rm --force -- /var/lib/random-seed
+
+   ## non-deterministic
+   ## /etc/nvme/hostid
+   ## /etc/nvme/hostnqn
+   ## nvme-cli's postinst writes random values here (nvme gen-hostnqn / uuidgen), only at
+   ## package configure time and only when missing or empty -- never at boot. So they
+   ## differ per build (breaks reproducibility) and would carry the build host's id;
+   ## delete them. These images do not use NVMe-over-Fabrics (the only consumer of these
+   ## files) and local NVMe disks need neither, so absence has no effect here. If NVMe-oF
+   ## were used, libnvme derives an id/NQN in memory at connect time (DMI UUID, else
+   ## device-tree, else random) and never persists it back here -- not a stable stored
+   ## identity. See libnvme nvme_host_get_ids() (src/nvme/tree.c) and nvmf_hostid_generate()
+   ## (src/nvme/fabrics.c).
+   safe-rm --force -- /etc/nvme/hostid
+   safe-rm --force -- /etc/nvme/hostnqn
+
+   ## non-deterministic
+   ## /var/lib/dkms/<module>/<version>/<kernel>/<arch>/log/make.log
+   ## dkms leaves a build log with timestamps when it builds a module in-chroot (e.g. tirdad).
+   ## A shipped image should not carry build logs; the built modules stay, only the log goes.
+   find /var/lib/dkms -type f -name 'make.log' -exec safe-rm --force -- {} \; || true
+
+   ## non-deterministic
+   ## /run/blkid/blkid.tab
+   ## /run/blkid/blkid.tab.old
+   ## /run is runtime tmpfs state and must be empty in a shipped image, but a build-time blkid
+   ## run leaked the disk-uuid cache into the rootfs. Strip it.
+   safe-rm -r -- /run/blkid/* || true
+
+   ## non-deterministic [21]
+   ## Only required when using the anon-shared-build-inst-tb chroot-post.d script.
+   ## No need to manually re-create it.
+   ## Gets automatically re-created on next run of tb-updater.
+   ## This is no longer required for Debian Jessie?
+   safe-rm -r -- /var/cache/tb-binary/.cache/tb/gpgtmpdir || true
+
+   ## Leftover from build process using mmdebstrap.
+   safe-rm --force -- /etc/apt/apt.conf.d/99mmdebstrap
+}
+
+clean_logs_and_history() {
+   ## Truncate all log files, keeping user groups and permissions.
+   find /var/log -type f -exec cp /dev/null {} \;
+
+   [[ -v user_name ]] || user_name="user"
+
+   ## Delete bash history.
+   safe-rm -- "/home/${user_name}/.bash_history" || true
+   safe-rm -- "/home/${user_name}/.Xauthority" || true
+   safe-rm -- "/root/.bash_history" || true
+   safe-rm -- "/root/.Xauthority" || true
+   history -c || true
+}
+
+main() {
+   own_filename="$(basename -- "${BASH_SOURCE[0]}")"
+
+   if should_skip "${own_filename}"; then
+      true "INFO: Skipping ${own_filename}, because SKIP_SCRIPTS includes it."
+      exit 0
+   fi
+
+   true "INFO: Cleaning up..."
+
+   clean_dhcp
+   clean_apt
+   check_debconf_passwords
+   reset_debconf_grub_devices
+   check_debconf_device_leak
+   clean_nondeterministic
+   clean_time_and_apt_sources
+   clean_dpkg_and_init
+   clean_seeds_and_ids
+   clean_logs_and_history
+
+   sync
+}
+
+if was_executed "${BASH_SOURCE[0]}"; then
+   main "$@"
 fi
-unset debconf_device_leak_pattern
-unset debconf_device_leak_detect_output
-
-## Do NOT delete templates.dat: it holds the question templates; removing it breaks
-## dpkg-reconfigure (2014 regression: `dpkg-reconfigure console-data` -> keymap "NONE").
-
-## non-deterministic
-## /var/cache/ldconfig/aux-cache -- ldconfig's binary auxiliary cache. Same size but
-## differing bytes between two independent builds (it records per-file identity, not just
-## paths). Safe to delete: ldconfig recreates it on the next run, and any package install
-## triggers one.
-##
-## TODO-HUMAN-ONLY: Verify that AI is correct about how the aux-cache works
-safe-rm --force -- /var/cache/ldconfig/aux-cache || true
-
-## non-deterministic
-## /etc/locale.conf (target of the /etc/default/locale symlink) -- update-locale writes its
-## assignment lines in a non-deterministic order, so two builds differ by line order alone.
-## Sort it: the header comment sorts before the KEY=value lines, and the relative order of
-## those lines is irrelevant to every consumer.
-if [ -f /etc/locale.conf ]; then
-   sort -- /etc/locale.conf | sponge -- /etc/locale.conf
-fi
-
-## non-deterministic
-## /usr/lib/<multiarch>/vlc/plugins/plugins.dat -- VLC's plugin cache, written by
-## vlc-cache-gen in raw readdir order (VLC's AllocatePluginDir does not sort and
-## ignores SOURCE_DATE_EPOCH), so it differs build-to-build. No in-chroot way to
-## regenerate it deterministically without patching VLC. Safe to delete: VLC scans
-## plugins at startup when the cache is absent, and Debian's dpkg trigger on
-## /usr/lib/*/vlc/plugins rebuilds it on the next apt transaction (Debian #755154).
-safe-rm --force -- /usr/lib/*/vlc/plugins/plugins.dat || true
-
-## Erase rotated logs (usually won't appear unless you left your VM running for several days).
-safe-rm -- /var/log/*.[0-9] || true
-safe-rm -- /var/log/*.[0-9].gz || true
-
-## Deletes /etc/system/sysinit.target.wants/systemd-timesyncd.service.
-## Otherwise timedatectl still thinks systemd-timesyncd is enabled.
-timedatectl set-ntp false >/dev/null 2>&1 || true
-## Make sure it gets really deleted even if timedatectl does not work.
-safe-rm --force -- /etc/systemd/system/sysinit.target.wants/systemd-timesyncd.service
-
-## Deletes /etc/apt/sources.list.d/derivative.sources.
-## Otherwise garbage apt config pointing to the derivative-maker approx proxy
-## will be left on the disk.
-safe-rm --force -- /etc/apt/sources.list.d/derivative.sources
-
-## Deletes /etc/apt/sources.list.
-## This file is no longer used since we've switched to deb822 format, and it
-## ends up being left as a blank file on the disk.
-safe-rm --force -- /etc/apt/sources.list
-
-## non-deterministic [0]
-## /var/lib/dpkg/available
-## /var/lib/dpkg/available-old
-dpkg --clear-avail
-
-## non-deterministic [14]
-## /etc/init.d/.depend.boot
-## /etc/init.d/.depend.start
-## /etc/init.d/.depend.stop
-## Recreate those and therefore hopefully come up with deterministic results.
-##
-## Only attempt to run `insserv` when it's installed. This ensures, that this
-## works on CI systems (Ubuntu) and in modified derivative versions as well.
-if [ -x /sbin/insserv ]; then
-   /sbin/insserv --showall
-   /sbin/insserv --verbose
-fi
-
-## non-deterministic [15]
-## /var/lib/urandom/random-seed
-## This is no longer required for Debian Jessie?
-## Should always be deleted for security reasons.
-safe-rm --force -- /var/lib/urandom/random-seed
-
-safe-rm --force -- /var/lib/systemd/random-seed
-safe-rm --force -- /var/lib/random-seed
-
-## non-deterministic
-## /etc/nvme/hostid
-## /etc/nvme/hostnqn
-## nvme-cli generates these randomly at install time (a different value per build). A
-## shipped image must not carry a build-host id; they are re-created as needed on first
-## boot. Deletion mirrors the random-seed handling above.
-##
-## FIXME: These files are not regenerated after a reboot despite the claim made
-## above (at least not in a Whonix-Workstation VirtualBox VM). It does not
-## appear it will be regenerated when running an `nvme` command either, see the
-## note in
-## https://manpages.debian.org/testing/nvme-cli/nvme-connect-all.1.en.html:
-##
-##     Overrides the default Host NQN that identifies the NVMe Host. If this
-##     option is not specified, the default is read from /etc/nvme/hostnqn
-##     first. If that does not exist, the autogenerated NQN value from the NVMe
-##     Host kernel module is used next.
-##
-## Revisit, this may need more careful handling.
-safe-rm --force -- /etc/nvme/hostid
-safe-rm --force -- /etc/nvme/hostnqn
-
-## non-deterministic
-## /var/lib/dkms/<module>/<version>/<kernel>/<arch>/log/make.log
-## dkms leaves a build log with timestamps when it builds a module in-chroot (e.g. tirdad).
-## A shipped image should not carry build logs; the built modules stay, only the log goes.
-find /var/lib/dkms -type f -name 'make.log' -exec safe-rm --force -- {} \; || true
-
-## non-deterministic
-## /run/blkid/blkid.tab
-## /run/blkid/blkid.tab.old
-## /run is runtime tmpfs state and must be empty in a shipped image, but a build-time blkid
-## run leaked the disk-uuid cache into the rootfs. Strip it.
-safe-rm -r -- /run/blkid/* || true
-
-## non-deterministic [21]
-## Only required when using the anon-shared-build-inst-tb chroot-post.d script.
-## No need to manually re-create it.
-## Gets automatically re-created on next run of tb-updater.
-## This is no longer required for Debian Jessie?
-safe-rm -r -- /var/cache/tb-binary/.cache/tb/gpgtmpdir || true
-
-## Leftover from build process using mmdebstrap.
-safe-rm --force -- /etc/apt/apt.conf.d/99mmdebstrap
-
-## Truncate all log files, keeping user groups and permissions.
-find /var/log -type f -exec cp /dev/null {} \;
-
-[[ -v user_name ]] || user_name="user"
-
-## Delete bash history.
-safe-rm -- "/home/$user_name/.bash_history" || true
-safe-rm -- "/home/$user_name/.Xauthority" || true
-safe-rm -- "/root/.bash_history" || true
-safe-rm -- "/root/.Xauthority" || true
-history -c || true
-
-sync
