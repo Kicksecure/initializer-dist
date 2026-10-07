@@ -131,6 +131,18 @@ check_debconf_device_leak() {
    fi
 }
 
+tmp_debugging() {
+   printf '%s\n' "DEBUG: TMP: '${TMP-}'" || true
+   printf '%s\n' "DEBUG: TMP: '${TEMP-}'" || true
+   printf '%s\n' "DEBUG: TMP: '${TMPDIR-}'" || true
+   printf '%s\n' "DEBUG: TMP: '${TEMPDIR-}'" || true
+   test -d /tmp || printf '%s\n' "DEBUG: folder /tmp missing!" || true
+   test -w /tmp || printf '%s\n' "DEBUG: folder /tmp not writeable!" || true
+   stat /tmp || printf '%s\n' "DEBUG: stat /tmp failed!" || true
+   mktemp || printf '%s\n' "DEBUG: mktemp failed!" || true
+   mktemp --directory || printf '%s\n' "DEBUG: mktemp --directory failed!" || true
+}
+
 clean_nondeterministic() {
    ## ldconfig recreates the aux-cache file when it is run. It is unclear what
    ## this file caches.
@@ -141,7 +153,15 @@ clean_nondeterministic() {
    ## update-locale writes /etc/locale.conf in a non-deterministic order. The
    ## order itself isn't meaningful.
    if [ -f /etc/locale.conf ]; then
-      sort -- /etc/locale.conf | sponge -- /etc/locale.conf
+      ## XXX: Using '|| true' because failing inside Qubes.
+      ## https://github.com/QubesOS/updates-status/issues/6989
+      ## > mkstemp failed: No such file or directory
+      ## At the time of writing Qubes Templates are not reproducible yet,
+      ## and this only matters for Non-Qubes.
+      ## In the worse case, this would cause non-reproducibility issues,
+      ## which would be caught during non-reproducibility testing.
+      tmp_debugging || true
+      sort -- /etc/locale.conf | sponge -- /etc/locale.conf || true
    fi
 
    ## VLC's plugin cache is written in whatever order readdir gives it, and
