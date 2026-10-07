@@ -1,3 +1,19 @@
+commit e05a7112da52e7ff54f030e8d32da0213d19593d
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Oct 7 10:17:09 2026 -0400
+
+    workaround for sponge build issue
+
+    > mkstemp failed: No such file or directory
+
+    https://github.com/QubesOS/updates-status/issues/6989
+
+commit 0ddb472ddbac245ad08a1e4e504c423b67a2b95c
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Oct 2 08:24:02 2026 +0000
+
+    bumped changelog version
+
 commit 5dcf48e005d269e24bc3882bbdb355bbfd784d7d
 Merge: f2356ae 71e06b5
 Author: Patrick Schleizer <adrelanos@whonix.org>
